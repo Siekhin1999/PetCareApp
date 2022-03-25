@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/home_24px"
+        android:title="Home"
+        />
+
+    <item
+        android:id="@+id/nav_diary"
+        android:icon="@drawable/diary_24px"
+        android:title="Diary"
+        />
+
+    <item
+        android:id="@+id/nav_tips"
+        android:icon="@drawable/idea_24px"
+        android:title="Tips"
+        />
+
+    <item
+        android:id="@+id/nav_training"
+        android:icon="@drawable/dog_training_30px"
+        android:title="Training"
+        />
+
+    <item
+        android:id="@+id/nav_profile"
+        android:icon="@drawable/dog_paw_64px"
+        android:title="Profile"
+        />
+
+</menu>
