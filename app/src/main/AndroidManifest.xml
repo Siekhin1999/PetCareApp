@@ -10,7 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PetCare">
         <activity
-            android:name=".BottomNavigation"
+            android:name=".Registration2"
+            android:exported="false" />
+        <activity
+            android:name=".Login"
+            android:exported="false" />
+        <activity
+            android:name=".Registration"
+            android:exported="false" />
+        <activity
+            android:name=".Homepage"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

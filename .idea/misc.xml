@@ -3,6 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/drawable/round_buttons.xml" value="0.2203125" />
+        <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/drawable/round_textfields.xml" value="0.2203125" />
+        <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/font/sniglet.xml" value="0.234375" />
+        <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/layout/activity_bottom_navigation.xml" value="0.17980072463768115" />
+        <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/layout/activity_login.xml" value="0.22" />
+        <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/layout/activity_registration.xml" value="0.22" />
+        <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/layout/activity_registration2.xml" value="0.18704710144927536" />
+        <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/layout/activity_registration_2ndpage.xml" value="0.18704710144927536" />
+        <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/layout/activity_splash_screen.xml" value="0.17980072463768115" />
         <entry key="..\:/Sem6/fyp/app/src/main/res/layout/activity_bottom_navigation.xml" value="0.18" />
         <entry key="..\:/Sem6/fyp/app/src/main/res/layout/activity_main.xml" value="0.19610507246376813" />
         <entry key="..\:/Sem6/fyp/app/src/main/res/layout/activity_splash_screen.xml" value="0.22" />

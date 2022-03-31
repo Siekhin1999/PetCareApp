@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "368212267414",
+    "firebase_url": "https://pet-care-application-fc562-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "pet-care-application-fc562",
+    "storage_bucket": "pet-care-application-fc562.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:368212267414:android:559d302a0cfc9bcf1fcdb7",
+        "android_client_info": {
+          "package_name": "com.example.petcare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "368212267414-ndcn9j4l3jnap4nujqv80259o9qc4a8p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCHN9HzEW6S_sRLl2pDeAlS_lmyfwkauE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "368212267414-ndcn9j4l3jnap4nujqv80259o9qc4a8p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
