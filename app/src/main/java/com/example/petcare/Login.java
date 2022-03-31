@@ -37,7 +37,8 @@ public class Login extends AppCompatActivity {
 
         btn_reg = findViewById(R.id.btn_register);
         btn_login = findViewById(R.id.btnlogin);
-        et_email = findViewById(R.id.et_petage);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar2);
+        et_email = findViewById(R.id.et_email);
         et_password = findViewById(R.id.et_password);
         fAuth = FirebaseAuth.getInstance();
         fUser = fAuth.getCurrentUser();
@@ -45,14 +46,15 @@ public class Login extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                perforLogin();
             }
         });
 
         btn_reg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(Login.this, Registration.class);
+                startActivity(intent);
             }
         });
 
@@ -85,9 +87,6 @@ public class Login extends AppCompatActivity {
             et_password.requestFocus();
         }
 
-
-
-
         else{
             progressBar.setVisibility(View.VISIBLE);
             fAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -114,8 +113,4 @@ public class Login extends AppCompatActivity {
             });
         }
     }
-
-
-
-
 }
