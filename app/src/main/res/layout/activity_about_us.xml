@@ -4,8 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/watercolorpink_bg"
-    tools:context=".TipsFragment">
-
+    tools:context=".AboutUs">
 
 </androidx.constraintlayout.widget.ConstraintLayout>
