@@ -46,7 +46,7 @@ public class Registration extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_registration);
 
-        btnRegister = findViewById(R.id.btn_register);
+        btnRegister = findViewById(R.id.btn_logout);
         etName = findViewById(R.id.et_username);
         etEmail = findViewById(R.id.et_email);
         etPassword = findViewById(R.id.et_password);

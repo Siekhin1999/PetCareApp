@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:background="@drawable/round_buttons"
-        android:fontFamily="sans-serif-thin"
+        android:fontFamily="@font/text_me_one"
         android:text="Login"
         android:textAllCaps="true"
         android:textSize="18sp"
@@ -88,7 +88,7 @@
 
 
     <TextView
-        android:id="@+id/btn_register"
+        android:id="@+id/btn_logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"

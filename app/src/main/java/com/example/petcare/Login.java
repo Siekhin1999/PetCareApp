@@ -40,7 +40,7 @@ public class Login extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_login);
 
-        btn_reg = findViewById(R.id.btn_register);
+        btn_reg = findViewById(R.id.btn_logout);
         btn_login = findViewById(R.id.btnlogin);
         progressBar = (ProgressBar) findViewById(R.id.progressBar2);
         et_email = findViewById(R.id.et_email);
