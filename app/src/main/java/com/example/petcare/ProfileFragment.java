@@ -9,8 +9,6 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -65,7 +63,7 @@ public class ProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
 //        ImageView btnPetprofile = (ImageView) view.findViewById(R.id.btn_petprofile);
-        CardView btnprofile = (CardView)view.findViewById(R.id.btn_profile);
+        CardView btnprofile = (CardView)view.findViewById(R.id.btn_tips);
         btnprofile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
