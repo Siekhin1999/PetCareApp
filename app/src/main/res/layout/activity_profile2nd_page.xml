@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/btn_tips"
+        android:id="@+id/btn_changephoto"
         android:layout_width="125dp"
         android:layout_height="115dp"
         android:layout_marginStart="32dp"
@@ -41,7 +41,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/imageView1"
+                android:id="@+id/img_pet3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:scaleType="centerCrop"
@@ -65,7 +65,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_tips"
+        app:layout_constraintTop_toBottomOf="@+id/btn_changephoto"
         app:srcCompat="@drawable/dog_paw_64px" />
 
     <TextView
