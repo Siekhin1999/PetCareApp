@@ -3,10 +3,13 @@ package com.example.petcare;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,6 +62,44 @@ public class TipsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tips, container, false);
+        View view = inflater.inflate(R.layout.fragment_tips, container, false);
+
+        TextView tv_tab_dog = (TextView)view.findViewById(R.id.tv_tab_dog);
+        TextView tv_tab_cat = (TextView)view.findViewById(R.id.tv_tab_cat);
+        RelativeLayout dogtipsView = (RelativeLayout)view.findViewById(R.id.dogtipsView);
+        RelativeLayout cattipsView = (RelativeLayout)view.findViewById(R.id.cattipsView);
+        RecyclerView dogtipsRecycler = (RecyclerView)view.findViewById(R.id.dogtipsRecycler);
+        RecyclerView cattipsRecycler = (RecyclerView)view.findViewById(R.id.cattipsRecycler);
+
+
+
+        tv_tab_dog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dogtipsView.setVisibility(View.VISIBLE);
+                cattipsView.setVisibility(View.GONE);
+
+                tv_tab_dog.setBackgroundResource(R.drawable.shape_rect_2);
+                tv_tab_cat.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+
+            }
+        });
+
+        tv_tab_cat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cattipsView.setVisibility(View.VISIBLE);
+                dogtipsView.setVisibility(View.GONE);
+
+                tv_tab_cat.setBackgroundResource(R.drawable.shape_rect_2);
+                tv_tab_dog.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+
+            }
+        });
+
+
+
+
+        return view;
     }
 }

@@ -2,11 +2,13 @@ package com.example.petcare;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +23,8 @@ import com.google.firebase.database.ValueEventListener;
 public class Profile2ndPage extends AppCompatActivity {
 
     TextView tvpetname, tvpetage, tvgender, tvusername, tvemail;
+    CardView btnchangephoto;
+    ImageView imageView;
     Button btnlogout;
     FirebaseAuth fAuth;
     FirebaseUser fUser;
@@ -33,6 +37,8 @@ public class Profile2ndPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile2nd_page);
 
+
+
         tvpetname = findViewById(R.id.tv_petname);
         tvpetage = findViewById(R.id.tv_petage);
         tvgender = findViewById(R.id.tv_gender);
@@ -44,6 +50,17 @@ public class Profile2ndPage extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
         userRef = database.getReference("UserData");
+
+        //set onclickliner on imageview to open uploadprofileactivity
+        btnchangephoto = findViewById(R.id.btn_changephoto);
+        imageView = findViewById(R.id.img_pet3);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Profile2ndPage.this, UploadProfilePicActivity.class);
+                startActivity(intent);
+            }
+        });
 
         btnlogout = findViewById(R.id.btn_logout);
         btnlogout.setOnClickListener(new View.OnClickListener() {
@@ -62,41 +79,12 @@ public class Profile2ndPage extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 //successfully
-                /*for (DataSnapshot ds : dataSnapshot.getChildren()){
-                    if (ds.child("email").getValue().equals(email)){
-                        tvusername.setText(ds.child("username").getValue(String.class));
-                        tvemail.setText(ds.child("email").getValue(String.class));
-                        tvage.setText(ds.child("age").getValue(String.class));
-                        tvstartdate.setText(ds.child("startDate").getValue(String.class));
-                        tvenddate.setText(ds.child("endDate").getValue(String.class));
-                    }
-                }*/
-//                UserData userData = dataSnapshot.getValue(UserData.class);
-
-//                tvusername.setText("Name: " + userData.getName());
-//                tvemail.setText("Email: " + userData.getEmail());
-//                tvage.setText("Age: " + userData.getAge());
-//                tvstartdate.setText("Start Recovery Date: " + userData.getStartDate());
-//                tvenddate.setText("End Recovery Date: " + userData.getEndDate());
 
                 tvpetname.setText("Pet Name: " + dataSnapshot.child("petname").getValue());
                 tvpetage.setText("Pet Age: " + dataSnapshot.child("petage").getValue());
                 tvgender.setText("Gender: " + dataSnapshot.child("petgender").getValue());
                 tvusername.setText("Pet Owner: " + dataSnapshot.child("name").getValue());
                 tvemail.setText("Email: " + dataSnapshot.child("email").getValue());
-
-                /*String username = dataSnapshot.child("UserData").child(fUser.getUid()).child("username").getValue(String.class);
-                tvusername.setText(username);
-
-                String email = dataSnapshot.child("UserData").child(fUser.getUid()).child("email").getValue(String.class);
-                tvemail.setText(email);
-
-                String age = dataSnapshot.child("UserData").child(fUser.getUid()).child("age").getValue(String.class);
-                tvage.setText(age);
-                String startdate = dataSnapshot.child("UserData").child(fUser.getUid()).child("startDate").getValue(String.class);
-                tvstartdate.setText(startdate);
-                String enddate = dataSnapshot.child("UserData").child(fUser.getUid()).child("endDate").getValue(String.class);
-                tvenddate.setText(enddate);*/
 
 
             }

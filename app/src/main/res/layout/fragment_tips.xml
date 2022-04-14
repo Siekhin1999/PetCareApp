@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,5 +7,99 @@
     android:background="@drawable/watercolorpink_bg"
     tools:context=".TipsFragment">
 
+    <ImageView
+        android:id="@+id/btn_imglogout2"
+        android:layout_width="44dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginStart="330dp"
+        app:layout_constraintHorizontal_bias="0.836"
+        app:layout_constraintStart_toEndOf="@+id/tv_petcaretips"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logout_24px" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/tv_petcaretips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/assistant"
+        android:text="Pet Care Tips"
+        android:textSize="28sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/slide_bar_pet"
+        android:background="@drawable/shape_rect_1"
+        android:layout_below="@id/tv_petcaretips"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <TextView
+            android:background="@drawable/shape_rect_2"
+            android:id="@+id/tv_tab_dog"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="@font/antic"
+            android:gravity="center"
+            android:text="Dogs"
+            android:textAllCaps="true"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_tab_cat"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="@font/antic"
+            android:gravity="center"
+            android:text="Cats"
+            android:textAllCaps="true"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <!--Dogs UI-->
+    <RelativeLayout
+        android:id="@+id/dogtipsView"
+        android:layout_below="@id/slide_bar_pet"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/dogtipsRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            //tools:listitem="@layout/activity_row_petcaretips" />
+    </RelativeLayout>
+
+    <!--Cats UI-->
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/cattipsView"
+        android:layout_below="@id/slide_bar_pet"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/cattipsRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        //tools:listitem="@layout/activity_row_petcaretips" />
+    </RelativeLayout>
+
+
+
+
+</RelativeLayout>
