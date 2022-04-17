@@ -2,7 +2,9 @@ package com.example.petcare;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -10,6 +12,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.example.petcare.adapterDogTips.DogTipsAdapterFirebase;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,6 +38,7 @@ public class TipsFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private Object DogTipsAdapterFirebase;
 
     public TipsFragment() {
         // Required empty public constructor
@@ -58,6 +71,14 @@ public class TipsFragment extends Fragment {
         }
     }
 
+    private DatabaseReference reference;
+    private ArrayList<DogTipsFirebase> dogTipsList;
+    private ArrayList<CatTipsFirebase> catTipsList;
+    LinearLayoutManager linearLayoutManager;
+    RecyclerView dogtipsRecycler, cattipsRecycler;
+    private DogTipsAdapterFirebase dogTipsAdapterFirebase;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -68,8 +89,18 @@ public class TipsFragment extends Fragment {
         TextView tv_tab_cat = (TextView)view.findViewById(R.id.tv_tab_cat);
         RelativeLayout dogtipsView = (RelativeLayout)view.findViewById(R.id.dogtipsView);
         RelativeLayout cattipsView = (RelativeLayout)view.findViewById(R.id.cattipsView);
-        RecyclerView dogtipsRecycler = (RecyclerView)view.findViewById(R.id.dogtipsRecycler);
-        RecyclerView cattipsRecycler = (RecyclerView)view.findViewById(R.id.cattipsRecycler);
+        dogtipsRecycler = (RecyclerView)view.findViewById(R.id.dogtipsRecycler);
+        cattipsRecycler = (RecyclerView)view.findViewById(R.id.cattipsRecycler);
+
+        reference = FirebaseDatabase.getInstance().getReference();
+
+        dogTipsList = new ArrayList<>();
+//      ClearDogAll();
+        GetDogDataFromFirebase();
+
+        catTipsList = new ArrayList<>();
+
+
 
 
 
@@ -97,9 +128,51 @@ public class TipsFragment extends Fragment {
             }
         });
 
-
-
-
         return view;
     }
+
+    private void GetDogDataFromFirebase() {
+        Query query = reference.child("DogCareTips");
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                //clear list at start
+                dogTipsList.clear();
+
+                for (DataSnapshot ds : dataSnapshot.getChildren()){
+                    DogTipsFirebase dogTipsFirebase = new DogTipsFirebase();
+
+                    dogTipsFirebase.setImage(ds.child("Image").getValue().toString());
+                    dogTipsFirebase.setTitle(ds.child("Title").getValue().toString());
+                    dogTipsFirebase.setDescription(ds.child("Description").getValue().toString());
+                    dogTipsFirebase.setTipsId(ds.child("tipsId").getValue().toString());
+                    dogTipsList.add(dogTipsFirebase);
+                }
+
+                //setup adapter
+                dogTipsAdapterFirebase = new DogTipsAdapterFirebase(getActivity(),dogTipsList);
+                //set adapter to recyclerview
+                dogtipsRecycler.setLayoutManager(linearLayoutManager);
+                dogtipsRecycler.setAdapter(dogTipsAdapterFirebase);
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+/*    private void ClearDogAll() {
+        if (dogTipsList != null) {
+            dogTipsList.clear();
+
+            if(DogTipsAdapterFirebase != null){
+                DogTipsAdapterFirebase.notifyDataSetChanged();
+            }
+        }
+        dogTipsList = new ArrayList<>();
+    }*/
 }

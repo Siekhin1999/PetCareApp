@@ -10,10 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PetCare">
         <activity
-            android:name=".row_cat_tips"
-            android:exported="false" />
-        <activity
-            android:name=".row_dog_tips"
+            android:name=".DogTipsDetailActivity"
             android:exported="false" />
         <activity
             android:name=".UploadProfilePicActivity"
