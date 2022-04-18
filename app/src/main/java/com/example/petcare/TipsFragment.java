@@ -3,6 +3,7 @@ package com.example.petcare;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -71,17 +72,17 @@ public class TipsFragment extends Fragment {
         }
     }
 
-    private DatabaseReference reference;
-    private ArrayList<DogTipsFirebase> dogTipsList;
-    private ArrayList<CatTipsFirebase> catTipsList;
+    DatabaseReference reference;
+    ArrayList<DogTipsFirebase> dogTipsList;
+    ArrayList<CatTipsFirebase> catTipsList;
     LinearLayoutManager linearLayoutManager;
     RecyclerView dogtipsRecycler, cattipsRecycler;
-    private DogTipsAdapterFirebase dogTipsAdapterFirebase;
+    DogTipsAdapterFirebase dogTipsAdapterFirebase;
 
-
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tips, container, false);
 
@@ -94,14 +95,13 @@ public class TipsFragment extends Fragment {
 
         reference = FirebaseDatabase.getInstance().getReference();
 
+        //for dog tips recyclerview
         dogTipsList = new ArrayList<>();
 //      ClearDogAll();
         GetDogDataFromFirebase();
 
+        //for cat tips recyclerview
         catTipsList = new ArrayList<>();
-
-
-
 
 
         tv_tab_dog.setOnClickListener(new View.OnClickListener() {
@@ -131,6 +131,7 @@ public class TipsFragment extends Fragment {
         return view;
     }
 
+    //for dog recycler view
     private void GetDogDataFromFirebase() {
         Query query = reference.child("DogCareTips");
         query.addValueEventListener(new ValueEventListener() {
@@ -154,7 +155,6 @@ public class TipsFragment extends Fragment {
                 //set adapter to recyclerview
                 dogtipsRecycler.setLayoutManager(linearLayoutManager);
                 dogtipsRecycler.setAdapter(dogTipsAdapterFirebase);
-
 
             }
 

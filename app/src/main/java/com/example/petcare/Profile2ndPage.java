@@ -37,8 +37,6 @@ public class Profile2ndPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile2nd_page);
 
-
-
         tvpetname = findViewById(R.id.tv_petname);
         tvpetage = findViewById(R.id.tv_petage);
         tvgender = findViewById(R.id.tv_gender);
