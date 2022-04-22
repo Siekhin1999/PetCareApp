@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class DogTipsDetailActivity extends AppCompatActivity {
+public class CatTipsDetailActivity extends AppCompatActivity {
 
     String tipsId="";
     private FirebaseAuth fAuth;
@@ -33,6 +33,8 @@ public class DogTipsDetailActivity extends AppCompatActivity {
         tvDescription.setText(intent.getStringExtra("tipsDetail"));
 //        img.setImageResource(getIntent().getIntExtra("image" ,0));
         String image = intent.getStringExtra("image");
-        Glide.with(DogTipsDetailActivity.this).load(image).into(img);
+        Glide.with(CatTipsDetailActivity.this).load(image).into(img);
+
+
     }
 }

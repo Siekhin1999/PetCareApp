@@ -7,12 +7,14 @@
         <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/drawable/round_textfields.xml" value="0.2203125" />
         <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/drawable/shape_react_1.xml" value="0.2203125" />
         <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/drawable/shape_rect_2.xml" value="0.2203125" />
+        <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/drawable/title_background.xml" value="0.2203125" />
         <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/font/antic.xml" value="0.234375" />
         <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/font/assistant.xml" value="0.234375" />
         <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/font/sniglet.xml" value="0.234375" />
         <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/font/text_me_one.xml" value="0.234375" />
         <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/layout/activity_about_us.xml" value="0.1802536231884058" />
         <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/layout/activity_bottom_navigation.xml" value="0.17980072463768115" />
+        <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/layout/activity_cat_tips_detail.xml" value="0.17844202898550723" />
         <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/layout/activity_dog_tips_detail.xml" value="0.17074275362318841" />
         <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/layout/activity_homepage.xml" value="0.22" />
         <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/layout/activity_login.xml" value="0.22" />
@@ -25,6 +27,7 @@
         <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/layout/activity_row_dog_tips.xml" value="0.17074275362318841" />
         <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/layout/activity_row_petcaretips.xml" value="0.17980072463768115" />
         <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/layout/activity_splash_screen.xml" value="0.17980072463768115" />
+        <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/layout/activity_tips_detail.xml" value="0.17844202898550723" />
         <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/layout/activity_upload_profile_pic.xml" value="0.18" />
         <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/layout/fragment_diary.xml" value="0.1802536231884058" />
         <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/layout/fragment_home.xml" value="0.2" />
@@ -32,6 +35,8 @@
         <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/layout/fragment_profile2nd.xml" value="0.22" />
         <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/layout/fragment_tips.xml" value="0.22" />
         <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/layout/fragment_training.xml" value="0.1802536231884058" />
+        <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/layout/row_cat_tips.xml" value="0.17844202898550723" />
+        <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/layout/row_dog_tips.xml" value="0.17844202898550723" />
         <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/menu/bottom_nav.xml" value="0.20416666666666666" />
         <entry key="..\:/Sem6/fyp/app/src/main/res/layout/activity_bottom_navigation.xml" value="0.18" />
         <entry key="..\:/Sem6/fyp/app/src/main/res/layout/activity_main.xml" value="0.19610507246376813" />

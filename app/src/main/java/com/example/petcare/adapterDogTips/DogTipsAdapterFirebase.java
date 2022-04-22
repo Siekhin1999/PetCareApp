@@ -1,6 +1,7 @@
 package com.example.petcare.adapterDogTips;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.petcare.DogTipsDetailActivity;
 import com.example.petcare.DogTipsFirebase;
 import com.example.petcare.R;
 
@@ -35,15 +37,29 @@ public class DogTipsAdapterFirebase extends RecyclerView.Adapter<DogTipsAdapterF
     public DogTipsAdapterFirebase.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.row_dog_tips,parent,false);
 
-        return new ViewHolder(view);
+        return new DogTipsAdapterFirebase.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull DogTipsAdapterFirebase.ViewHolder holder, int position) {
-        holder.textView.setText(dogTipsList.get(position).getTitle());
+        //get data
+        DogTipsFirebase dogTipsFirebase = dogTipsList.get(position);
+        final String title = dogTipsFirebase.getTitle();
+        final String description = dogTipsFirebase.getDescription();
+        String image = dogTipsFirebase.getImage();
+        final String uid = dogTipsFirebase.getTipsId();
+
+        //set data
+        holder.tv_dog_tips.setText(title);
         Glide.with(mContext)
                 .load(dogTipsList.get(position).getImage())
-                .into(holder.imageView);
+                .into(holder.img_dog_tips);
+
+
+//        holder.tv_dog_tips.setText(dogTipsList.get(position).getTitle());
+//        Glide.with(mContext)
+//                .load(dogTipsList.get(position).getImage())
+ //               .into(holder.img_dog_tips);
 
     }
 
@@ -53,8 +69,8 @@ public class DogTipsAdapterFirebase extends RecyclerView.Adapter<DogTipsAdapterF
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        ImageView imageView;
-        TextView textView;
+        ImageView img_dog_tips;
+        TextView tv_dog_tips;
         TextView description;
         CardView cardView;
 
@@ -62,8 +78,8 @@ public class DogTipsAdapterFirebase extends RecyclerView.Adapter<DogTipsAdapterF
             super(itemView);
 
             cardView = itemView.findViewById(R.id.card_container);
-            imageView = itemView.findViewById(R.id.image_dog_tips);
-            textView = itemView.findViewById(R.id.tv_dog_tips);
+            img_dog_tips = itemView.findViewById(R.id.image_dog_tips);
+            tv_dog_tips = itemView.findViewById(R.id.tv_dog_tips);
 
             itemView.setOnClickListener(this);
         }
@@ -72,12 +88,12 @@ public class DogTipsAdapterFirebase extends RecyclerView.Adapter<DogTipsAdapterF
         public void onClick(View view) {
             Toast.makeText(view.getContext(), "Tips: " + dogTipsList.get(getAdapterPosition()).getTitle(),Toast.LENGTH_SHORT).show();
 
-/*          Intent intent = new Intent(view.getContext(), DogTipsDetailActivity.class);
-            intent.putExtra("tipsName", tipsList.get(getAdapterPosition()).getTitle());
-            intent.putExtra("tipsDetail", tipsList.get(getAdapterPosition()).getDescription());
-            intent.putExtra("image", tipsList.get(getAdapterPosition()).getImage());
-            intent.putExtra("tipsId", tipsList.get(getAdapterPosition()).getTipsId());
-            view.getContext().startActivity(intent);*/
+            Intent intent = new Intent(view.getContext(), DogTipsDetailActivity.class);
+            intent.putExtra("tipsName", dogTipsList.get(getAdapterPosition()).getTitle());
+            intent.putExtra("tipsDetail", dogTipsList.get(getAdapterPosition()).getDescription());
+            intent.putExtra("image", dogTipsList.get(getAdapterPosition()).getImage());
+            intent.putExtra("tipsId", dogTipsList.get(getAdapterPosition()).getTipsId());
+            view.getContext().startActivity(intent);
         }
     }
 

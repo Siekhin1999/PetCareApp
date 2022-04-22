@@ -86,17 +86,18 @@
 
     <!--Cats UI-->
     <RelativeLayout
-        android:visibility="gone"
         android:id="@+id/cattipsView"
-        android:layout_below="@id/slide_bar_pet"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@id/slide_bar_pet"
+        android:visibility="gone">
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/cattipsRecycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
         //tools:listitem="@layout/activity_row_petcaretips" />
     </RelativeLayout>
 

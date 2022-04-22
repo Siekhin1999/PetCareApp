@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.petcare.adapetCatTips.CatTipsAdapterFirebase;
 import com.example.petcare.adapterDogTips.DogTipsAdapterFirebase;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -40,6 +41,7 @@ public class TipsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private Object DogTipsAdapterFirebase;
+    private Object CatTipsAdapterFirebase;
 
     public TipsFragment() {
         // Required empty public constructor
@@ -78,6 +80,7 @@ public class TipsFragment extends Fragment {
     LinearLayoutManager linearLayoutManager;
     RecyclerView dogtipsRecycler, cattipsRecycler;
     DogTipsAdapterFirebase dogTipsAdapterFirebase;
+    CatTipsAdapterFirebase catTipsAdapterFirebase;
 
     @Nullable
     @Override
@@ -92,6 +95,7 @@ public class TipsFragment extends Fragment {
         RelativeLayout cattipsView = (RelativeLayout)view.findViewById(R.id.cattipsView);
         dogtipsRecycler = (RecyclerView)view.findViewById(R.id.dogtipsRecycler);
         cattipsRecycler = (RecyclerView)view.findViewById(R.id.cattipsRecycler);
+//        linearLayoutManager = new LinearLayoutManager(this);
 
         reference = FirebaseDatabase.getInstance().getReference();
 
@@ -102,6 +106,7 @@ public class TipsFragment extends Fragment {
 
         //for cat tips recyclerview
         catTipsList = new ArrayList<>();
+        GetCatDataFromFirebase();
 
 
         tv_tab_dog.setOnClickListener(new View.OnClickListener() {
@@ -131,6 +136,8 @@ public class TipsFragment extends Fragment {
         return view;
     }
 
+
+
     //for dog recycler view
     private void GetDogDataFromFirebase() {
         Query query = reference.child("DogCareTips");
@@ -152,8 +159,9 @@ public class TipsFragment extends Fragment {
 
                 //setup adapter
                 dogTipsAdapterFirebase = new DogTipsAdapterFirebase(getActivity(),dogTipsList);
+
                 //set adapter to recyclerview
-                dogtipsRecycler.setLayoutManager(linearLayoutManager);
+                //dogtipsRecycler.setLayoutManager(linearLayoutManager);
                 dogtipsRecycler.setAdapter(dogTipsAdapterFirebase);
 
             }
@@ -163,6 +171,42 @@ public class TipsFragment extends Fragment {
 
             }
         });
+    }
+
+    //for cat recycler view
+    private void GetCatDataFromFirebase() {
+        Query query = reference.child("CatCareTips");
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                //clear list at start
+                catTipsList.clear();
+
+                for (DataSnapshot ds : dataSnapshot.getChildren()){
+                    CatTipsFirebase catTipsFirebase = new CatTipsFirebase();
+
+                    catTipsFirebase.setImage(ds.child("Image").getValue().toString());
+                    catTipsFirebase.setTitle(ds.child("Title").getValue().toString());
+                    catTipsFirebase.setDescription(ds.child("Description").getValue().toString());
+                    catTipsFirebase.setTipsId(ds.child("tipsId").getValue().toString());
+                    catTipsList.add(catTipsFirebase);
+                }
+
+                //setup adapter
+                catTipsAdapterFirebase = new CatTipsAdapterFirebase(getActivity(),catTipsList);
+
+                //set adapter to recyclerview
+                //dogtipsRecycler.setLayoutManager(linearLayoutManager);
+                cattipsRecycler.setAdapter(catTipsAdapterFirebase);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
 /*    private void ClearDogAll() {
