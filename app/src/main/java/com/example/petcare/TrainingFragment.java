@@ -2,11 +2,29 @@ package com.example.petcare;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.example.petcare.adapetCatTips.CatTipsAdapterFirebase;
+import com.example.petcare.adapterCatTrainings.CatTrainingAdapterFirebase;
+import com.example.petcare.adapterDogTips.DogTipsAdapterFirebase;
+import com.example.petcare.adapterDogTrainings.DogTrainingAdapterFirebase;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,10 +73,131 @@ public class TrainingFragment extends Fragment {
         }
     }
 
+    DatabaseReference reference;
+    ArrayList<DogTrainingFirebase> dogTrainingList;
+    ArrayList<CatTrainingFirebase> catTrainingList;
+    LinearLayoutManager linearLayoutManager;
+    RecyclerView dogTrngRecycler, catTrngRecycler;
+    DogTrainingAdapterFirebase dogTrainingAdapterFirebase;
+    CatTrainingAdapterFirebase catTrainingAdapterFirebase;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_training, container, false);
+        View view = inflater.inflate(R.layout.fragment_training, container, false);
+
+        TextView tv_tab_dog = (TextView)view.findViewById(R.id.tv_tab_dog);
+        TextView tv_tab_cat = (TextView)view.findViewById(R.id.tv_tab_cat);
+        RelativeLayout dogTrngView = (RelativeLayout)view.findViewById(R.id.dogTrainingView);
+        RelativeLayout catTrngView = (RelativeLayout)view.findViewById(R.id.catTrainingView);
+        dogTrngRecycler = (RecyclerView)view.findViewById(R.id.dogTrainingRecycler);
+        catTrngRecycler = (RecyclerView)view.findViewById(R.id.catTrainingRecycler);
+
+        reference = FirebaseDatabase.getInstance().getReference();
+
+        //for dog training recyclerview
+        dogTrainingList = new ArrayList<>();
+        GetDogDataFromFirebase();
+
+        //for cat training recyclerview
+        catTrainingList = new ArrayList<>();
+        GetCatDataFromFirebase();
+
+        tv_tab_dog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dogTrngView.setVisibility(View.VISIBLE);
+                catTrngView.setVisibility(View.GONE);
+
+                tv_tab_dog.setBackgroundResource(R.drawable.shape_rect_2);
+                tv_tab_cat.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+
+            }
+        });
+
+        tv_tab_cat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                catTrngView.setVisibility(View.VISIBLE);
+                dogTrngView.setVisibility(View.GONE);
+
+                tv_tab_cat.setBackgroundResource(R.drawable.shape_rect_2);
+                tv_tab_dog.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+
+            }
+        });
+
+        return view;
+    }
+
+    //for dog training recyclerview
+    private void GetDogDataFromFirebase() {
+        Query query = reference.child("DogTraining");
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                //clear list at start
+                dogTrainingList.clear();
+
+                for (DataSnapshot ds : dataSnapshot.getChildren()){
+                    DogTrainingFirebase dogTrainingFirebase = new DogTrainingFirebase();
+
+                    dogTrainingFirebase.setImage(ds.child("Image").getValue().toString());
+                    dogTrainingFirebase.setTitle(ds.child("Title").getValue().toString());
+                    dogTrainingFirebase.setDescription(ds.child("Description").getValue().toString());
+                    dogTrainingFirebase.setVideo(ds.child("Video").getValue().toString());
+                    dogTrainingFirebase.setVideo(ds.child("Link").getValue().toString());
+                    dogTrainingFirebase.setTrainingId(ds.child("trainingId").getValue().toString());
+                    dogTrainingList.add(dogTrainingFirebase);
+                }
+
+                //setup adapter
+                dogTrainingAdapterFirebase = new DogTrainingAdapterFirebase(getActivity(),dogTrainingList);
+
+                //set adapter to recyclerview
+                dogTrngRecycler.setAdapter(dogTrainingAdapterFirebase);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    //for cat training recyclerview
+    private void GetCatDataFromFirebase() {
+        Query query = reference.child("CatTraining");
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                //clear list at start
+                catTrainingList.clear();
+
+                for (DataSnapshot ds : dataSnapshot.getChildren()){
+                    DogTrainingFirebase dogTrainingFirebase = new DogTrainingFirebase();
+
+                    dogTrainingFirebase.setImage(ds.child("Image").getValue().toString());
+                    dogTrainingFirebase.setTitle(ds.child("Title").getValue().toString());
+                    dogTrainingFirebase.setDescription(ds.child("Description").getValue().toString());
+                    dogTrainingFirebase.setVideo(ds.child("Video").getValue().toString());
+                    dogTrainingFirebase.setVideo(ds.child("Link").getValue().toString());
+                    dogTrainingFirebase.setTrainingId(ds.child("trainingId").getValue().toString());
+                    dogTrainingList.add(dogTrainingFirebase);
+                }
+
+                //setup adapter
+                dogTrainingAdapterFirebase = new DogTrainingAdapterFirebase(getActivity(),dogTrainingList);
+
+                //set adapter to recyclerview
+                dogTrngRecycler.setAdapter(dogTrainingAdapterFirebase);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }

@@ -3,7 +3,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <array name="type">
-        <item>Male</item>
-        <item>Female</item>
+        <item>Male, Dog</item>
+        <item>Female, Dog</item>
+        <item>Male, Cat</item>
+        <item>Female, Cat</item>
     </array>
 </resources>

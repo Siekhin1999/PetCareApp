@@ -189,9 +189,7 @@ public class Registration extends AppCompatActivity {
         hashMap.put("petgender", petgender);
 
         reference = FirebaseDatabase.getInstance().getReference("UserData");
-//        UserData UserData = new UserData(name, password, email, age, startDate, endDate);
-        reference.child(uid).setValue(hashMap);
-//        reference.setValue(UserData);
 
+        reference.child(uid).setValue(hashMap);
     }
 }
