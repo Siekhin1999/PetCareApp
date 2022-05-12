@@ -15,10 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.petcare.DogTipsDetailActivity;
-import com.example.petcare.DogTipsFirebase;
 import com.example.petcare.DogTrainingFirebase;
 import com.example.petcare.R;
-import com.example.petcare.adapterDogTips.DogTipsAdapterFirebase;
 
 import java.util.ArrayList;
 

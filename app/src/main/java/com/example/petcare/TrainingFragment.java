@@ -147,7 +147,7 @@ public class TrainingFragment extends Fragment {
                     dogTrainingFirebase.setTitle(ds.child("Title").getValue().toString());
                     dogTrainingFirebase.setDescription(ds.child("Description").getValue().toString());
                     dogTrainingFirebase.setVideo(ds.child("Video").getValue().toString());
-                    dogTrainingFirebase.setVideo(ds.child("Link").getValue().toString());
+                    dogTrainingFirebase.setLinkUrl(ds.child("Link").getValue().toString());
                     dogTrainingFirebase.setTrainingId(ds.child("trainingId").getValue().toString());
                     dogTrainingList.add(dogTrainingFirebase);
                 }
@@ -176,22 +176,22 @@ public class TrainingFragment extends Fragment {
                 catTrainingList.clear();
 
                 for (DataSnapshot ds : dataSnapshot.getChildren()){
-                    DogTrainingFirebase dogTrainingFirebase = new DogTrainingFirebase();
+                    CatTrainingFirebase catTrainingFirebase = new CatTrainingFirebase();
 
-                    dogTrainingFirebase.setImage(ds.child("Image").getValue().toString());
-                    dogTrainingFirebase.setTitle(ds.child("Title").getValue().toString());
-                    dogTrainingFirebase.setDescription(ds.child("Description").getValue().toString());
-                    dogTrainingFirebase.setVideo(ds.child("Video").getValue().toString());
-                    dogTrainingFirebase.setVideo(ds.child("Link").getValue().toString());
-                    dogTrainingFirebase.setTrainingId(ds.child("trainingId").getValue().toString());
-                    dogTrainingList.add(dogTrainingFirebase);
+                    catTrainingFirebase.setImage(ds.child("Image").getValue().toString());
+                    catTrainingFirebase.setTitle(ds.child("Title").getValue().toString());
+                    catTrainingFirebase.setDescription(ds.child("Description").getValue().toString());
+                    catTrainingFirebase.setVideo(ds.child("Video").getValue().toString());
+                    catTrainingFirebase.setLinkUrl(ds.child("Link").getValue().toString());
+                    catTrainingFirebase.setTrainingId(ds.child("trainingId").getValue().toString());
+                    catTrainingList.add(catTrainingFirebase);
                 }
 
                 //setup adapter
-                dogTrainingAdapterFirebase = new DogTrainingAdapterFirebase(getActivity(),dogTrainingList);
+                catTrainingAdapterFirebase = new CatTrainingAdapterFirebase(getActivity(),catTrainingList);
 
                 //set adapter to recyclerview
-                dogTrngRecycler.setAdapter(dogTrainingAdapterFirebase);
+                catTrngRecycler.setAdapter(catTrainingAdapterFirebase);
             }
 
             @Override

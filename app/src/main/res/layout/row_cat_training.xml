@@ -47,7 +47,7 @@
                 android:scaleType="centerCrop" />
 
             <TextView
-                android:id="@+id/tv_dog_training"
+                android:id="@+id/tv_cat_training"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/image_cat_training"

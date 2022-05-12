@@ -5,15 +5,19 @@ public class CatTrainingFirebase {
     String Description;
     String Image;
     String Video;
-    String Link;
+    String LinkUrl;
     String trainingId;
 
-    public CatTrainingFirebase(String title, String description, String image, String video, String link, String trainingId) {
+    CatTrainingFirebase(){
+
+    }
+
+    public CatTrainingFirebase(String title, String description, String image, String video, String linkUrl, String trainingId) {
         Title = title;
         Description = description;
         Image = image;
         Video = video;
-        Link = link;
+        LinkUrl = linkUrl;
         this.trainingId = trainingId;
     }
 
@@ -49,12 +53,12 @@ public class CatTrainingFirebase {
         Video = video;
     }
 
-    public String getLink() {
-        return Link;
+    public String getLinkUrl() {
+        return LinkUrl;
     }
 
-    public void setLink(String link) {
-        Link = link;
+    public void setLinkUrl(String linkUrl) {
+        LinkUrl = linkUrl;
     }
 
     public String getTrainingId() {
