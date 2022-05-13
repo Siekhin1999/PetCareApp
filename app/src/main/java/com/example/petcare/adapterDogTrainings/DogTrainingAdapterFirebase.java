@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.petcare.DogTipsDetailActivity;
+import com.example.petcare.DogTrainingDetailActivity;
 import com.example.petcare.DogTrainingFirebase;
 import com.example.petcare.R;
 
@@ -82,13 +83,14 @@ public class DogTrainingAdapterFirebase extends RecyclerView.Adapter<DogTraining
         public void onClick(View view) {
             Toast.makeText(view.getContext(), "Training: " + dogTrainingList.get(getAdapterPosition()).getTitle(),Toast.LENGTH_SHORT).show();
 
-            Intent intent = new Intent(view.getContext(), DogTipsDetailActivity.class);
-            intent.putExtra("tipsName", dogTrainingList.get(getAdapterPosition()).getTitle());
-            intent.putExtra("tipsDetail", dogTrainingList.get(getAdapterPosition()).getDescription());
-            intent.putExtra("image", dogTrainingList.get(getAdapterPosition()).getImage());
+            Intent intent = new Intent(view.getContext(), DogTrainingDetailActivity.class);
+            intent.putExtra("trainingName", dogTrainingList.get(getAdapterPosition()).getTitle());
+            intent.putExtra("trainingDetail", dogTrainingList.get(getAdapterPosition()).getDescription());
+//            intent.putExtra("image", dogTrainingList.get(getAdapterPosition()).getImage());
             intent.putExtra("video", dogTrainingList.get(getAdapterPosition()).getVideo());
+
             intent.putExtra("link", dogTrainingList.get(getAdapterPosition()).getLinkUrl());
-            intent.putExtra("tipsId", dogTrainingList.get(getAdapterPosition()).getTrainingId());
+            intent.putExtra("trainingId", dogTrainingList.get(getAdapterPosition()).getTrainingId());
             view.getContext().startActivity(intent);
 
         }
