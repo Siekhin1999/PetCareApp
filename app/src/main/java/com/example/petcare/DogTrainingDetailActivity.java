@@ -41,8 +41,6 @@ public class DogTrainingDetailActivity extends AppCompatActivity {
         MediaController mediaController = new MediaController(this);
         videoView = findViewById(R.id.video_Detail);
         videoView.setMediaController(mediaController);
-//        mediaController.setAnchorView(videoView);
-
 
         tvTitle.setText(intent.getStringExtra("trainingName"));
         tvDescription.setText(intent.getStringExtra("trainingDetail"));
@@ -57,7 +55,6 @@ public class DogTrainingDetailActivity extends AppCompatActivity {
                 String link = intent.getStringExtra("link");
                 Uri uri1 = Uri.parse(link);
                 startActivity(new Intent(Intent.ACTION_VIEW,uri1));
-
             }
         });
 

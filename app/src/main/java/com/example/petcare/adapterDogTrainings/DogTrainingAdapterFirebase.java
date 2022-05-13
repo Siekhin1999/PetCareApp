@@ -88,7 +88,6 @@ public class DogTrainingAdapterFirebase extends RecyclerView.Adapter<DogTraining
             intent.putExtra("trainingDetail", dogTrainingList.get(getAdapterPosition()).getDescription());
 //            intent.putExtra("image", dogTrainingList.get(getAdapterPosition()).getImage());
             intent.putExtra("video", dogTrainingList.get(getAdapterPosition()).getVideo());
-
             intent.putExtra("link", dogTrainingList.get(getAdapterPosition()).getLinkUrl());
             intent.putExtra("trainingId", dogTrainingList.get(getAdapterPosition()).getTrainingId());
             view.getContext().startActivity(intent);

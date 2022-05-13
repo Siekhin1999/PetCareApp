@@ -77,13 +77,11 @@ public class Profile2ndPage extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 //successfully
-
                 tvpetname.setText("Pet Name: " + dataSnapshot.child("petname").getValue());
                 tvpetage.setText("Pet Age: " + dataSnapshot.child("petage").getValue());
                 tvgender.setText("Gender: " + dataSnapshot.child("petgender").getValue());
                 tvusername.setText("Pet Owner: " + dataSnapshot.child("name").getValue());
                 tvemail.setText("Email: " + dataSnapshot.child("email").getValue());
-
 
             }
 

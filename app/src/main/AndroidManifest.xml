@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PetCare">
         <activity
+            android:name=".Diary3rdPage"
+            android:exported="false" />
+        <activity
+            android:name=".Diary2ndPage"
+            android:exported="false" />
+        <activity
             android:name=".DogTrainingDetailActivity"
             android:exported="false" />
         <activity
