@@ -84,12 +84,12 @@ public class CatTrainingAdapterFirebase extends RecyclerView.Adapter<CatTraining
             Toast.makeText(view.getContext(), "Training: " + catTrainingList.get(getAdapterPosition()).getTitle(),Toast.LENGTH_SHORT).show();
 
             Intent intent = new Intent(view.getContext(), CatTrainingDetailActivity.class);
-            intent.putExtra("tipsName", catTrainingList.get(getAdapterPosition()).getTitle());
-            intent.putExtra("tipsDetail", catTrainingList.get(getAdapterPosition()).getDescription());
-            intent.putExtra("image", catTrainingList.get(getAdapterPosition()).getImage());
+            intent.putExtra("trainingName", catTrainingList.get(getAdapterPosition()).getTitle());
+            intent.putExtra("trainingDetail", catTrainingList.get(getAdapterPosition()).getDescription());
+//            intent.putExtra("image", catTrainingList.get(getAdapterPosition()).getImage());
             intent.putExtra("video", catTrainingList.get(getAdapterPosition()).getVideo());
             intent.putExtra("link", catTrainingList.get(getAdapterPosition()).getLinkUrl());
-            intent.putExtra("tipsId", catTrainingList.get(getAdapterPosition()).getTrainingId());
+            intent.putExtra("trainingId", catTrainingList.get(getAdapterPosition()).getTrainingId());
             view.getContext().startActivity(intent);
 
         }

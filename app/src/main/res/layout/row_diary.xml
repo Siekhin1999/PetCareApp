@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:background="@drawable/cream2_bg"
     android:orientation="vertical"
     android:padding="0dp"
     android:paddingStart="10dp"
@@ -40,16 +41,17 @@
             android:layout_marginBottom="0dp">
 
             <TextView
-                android:id="@+id/tv_diet"
+                android:id="@+id/tv_date_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                android:text="Diet"
-                android:textSize="20sp" />
+                android:layout_marginBottom="8dp"
+                android:textAlignment="viewStart"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/imageView"
@@ -57,7 +59,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/tv_food_intake"
                 android:layout_alignBottom="@+id/tv_food_intake"
-                android:layout_marginTop="5dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
                 android:layout_marginEnd="2dp"
                 android:layout_marginBottom="2dp"
                 android:layout_toStartOf="@+id/tv_food_intake"
@@ -67,16 +70,15 @@
                 android:id="@+id/tv_food_intake"
                 android:layout_width="270dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tv_diet"
-                android:layout_alignEnd="@+id/tv_diet"
+                android:layout_below="@id/tv_date_time"
+                android:layout_alignEnd="@+id/tv_date_time"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
-                android:textAlignment="center"
-                android:textSize="22sp"
-                android:textStyle="bold" />
+                android:textAlignment="viewStart"
+                android:textSize="18sp" />
 
             <ImageView
                 android:id="@+id/imageView2"
@@ -85,7 +87,7 @@
                 android:layout_alignStart="@+id/imageView"
                 android:layout_alignTop="@+id/tv_water_intake"
                 android:layout_alignBottom="@+id/tv_water_intake"
-                android:layout_marginStart="5dp"
+                android:layout_marginStart="0dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="2dp"
                 android:layout_marginBottom="0dp"
@@ -103,9 +105,62 @@
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="0dp"
                 android:layout_marginBottom="16dp"
-                android:textAlignment="center"
-                android:textSize="22sp"
-                android:textStyle="bold" />
+                android:textAlignment="viewStart"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/imageView2"
+                android:layout_alignTop="@+id/tv_outdoor_note"
+                android:layout_alignBottom="@+id/tv_outdoor_note"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginBottom="0dp"
+                android:layout_toStartOf="@+id/tv_outdoor_note"
+                app:srcCompat="@drawable/dog_park_24px" />
+
+            <TextView
+                android:id="@+id/tv_outdoor_note"
+                android:layout_width="270dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_water_intake"
+                android:layout_alignEnd="@+id/tv_water_intake"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="16dp"
+                android:textAlignment="viewStart"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_health_note"
+                android:layout_width="270dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_outdoor_note"
+                android:layout_alignStart="@id/imageView4"
+                android:layout_marginLeft="45dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="16dp"
+                android:textAlignment="viewStart"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/imageView"
+                android:layout_alignTop="@+id/tv_health_note"
+                android:layout_alignBottom="@+id/tv_health_note"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="2dp"
+                android:layout_toStartOf="@+id/tv_outdoor_note"
+                app:srcCompat="@drawable/health2_100px" />
 
         </RelativeLayout>
 
