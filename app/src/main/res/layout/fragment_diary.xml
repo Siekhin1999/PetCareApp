@@ -19,18 +19,18 @@
         android:textStyle="bold" />
 
     <RelativeLayout
-        android:id="@+id/petDiaryView"
+        android:id="@+id/petProfileView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/tv_petdiary">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/petDiaryRecycler"
+            android:id="@+id/petProfileRecycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-         />
+
     </RelativeLayout>
 
 

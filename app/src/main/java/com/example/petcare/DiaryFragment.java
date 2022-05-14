@@ -3,10 +3,18 @@ package com.example.petcare;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,10 +63,29 @@ public class DiaryFragment extends Fragment {
         }
     }
 
+    DatabaseReference reference;
+    RecyclerView petProfileRecycler;
+    ArrayList<UserDataFirebase> userPetList;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_diary, container, false);
+        View view = inflater.inflate(R.layout.fragment_diary, container, false);
+
+        TextView tv_title = (TextView)view.findViewById(R.id.tv_petdiary);
+        RelativeLayout petProfileView = (RelativeLayout)view.findViewById(R.id.petProfileView);
+        petProfileRecycler = (RecyclerView)view.findViewById(R.id.petProfileRecycler);
+
+        reference = FirebaseDatabase.getInstance().getReference();
+
+        //for pet diary recyclerview
+        userPetList = new ArrayList<>();
+        GetPetDataFromFirebase();
+
+        return view;
+    }
+
+    private void GetPetDataFromFirebase() {
     }
 }
