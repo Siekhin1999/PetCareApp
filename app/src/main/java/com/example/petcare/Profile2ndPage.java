@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -19,6 +21,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
 
 public class Profile2ndPage extends AppCompatActivity {
 
@@ -29,6 +32,7 @@ public class Profile2ndPage extends AppCompatActivity {
     FirebaseAuth fAuth;
     FirebaseUser fUser;
     FirebaseDatabase database;
+    FirebaseStorage fStorage;
     DatabaseReference userRef;
     private static final String USERS = "UserData";
 
@@ -45,6 +49,7 @@ public class Profile2ndPage extends AppCompatActivity {
 
         fAuth = FirebaseAuth.getInstance();
         fUser = fAuth.getCurrentUser();
+        fStorage = FirebaseStorage.getInstance();
 
         database = FirebaseDatabase.getInstance();
         userRef = database.getReference("UserData");
@@ -52,13 +57,6 @@ public class Profile2ndPage extends AppCompatActivity {
         //set onclickliner on imageview to open uploadprofileactivity
         btnchangephoto = findViewById(R.id.btn_changephoto);
         imageView = findViewById(R.id.img_pet3);
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Profile2ndPage.this, UploadProfilePicActivity.class);
-                startActivity(intent);
-            }
-        });
 
         btnlogout = findViewById(R.id.btn_logout);
         btnlogout.setOnClickListener(new View.OnClickListener() {
@@ -82,6 +80,11 @@ public class Profile2ndPage extends AppCompatActivity {
                 tvgender.setText("Gender: " + dataSnapshot.child("petgender").getValue());
                 tvusername.setText("Pet Owner: " + dataSnapshot.child("name").getValue());
                 tvemail.setText("Email: " + dataSnapshot.child("email").getValue());
+                //imageView.setImageURI((Uri) dataSnapshot.child("image").getValue());
+                String image = (String) dataSnapshot.child("image").getValue();
+                //Glide.with(Profile2ndPage.this).load(image).into(imageView);
+
+
 
             }
 

@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.view.Window;
@@ -23,6 +25,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.HashMap;
 
@@ -32,11 +36,14 @@ public class Registration extends AppCompatActivity {
     EditText etName, etEmail, etPassword, etRetype, etPetname, etPetage;
     Spinner spn_type;
     TextView backLogin;
+    String imgDog="", imgCat="";
     ProgressBar progressBar;
     FirebaseAuth fAuth;
     FirebaseUser fUser;
     FirebaseDatabase rootNode;
+    FirebaseStorage fStorage;
     DatabaseReference reference;
+    StorageReference storageReference, storageReference2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +73,7 @@ public class Registration extends AppCompatActivity {
 
         fAuth = FirebaseAuth.getInstance();
         fUser = fAuth.getCurrentUser();
+        fStorage = FirebaseStorage.getInstance();
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -168,16 +176,21 @@ public class Registration extends AppCompatActivity {
     }
 
     private void sendUserData() {
-        /*FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();*/
         String uid = fAuth.getUid();
-//        reference = FirebaseDatabase.getInstance().getReference(fAuth.getUid());
-
         String name = etName.getText().toString();
         String email = etEmail.getText().toString();
         String password = etPassword.getText().toString();
         String petname = etPetname.getText().toString();
         String petage = etPetage.getText().toString();
         String petgender = spn_type.getSelectedItem().toString();
+        String imageDog = fStorage.getReferenceFromUrl("https://firebasestorage.googleapis.com/v0/b/pet-care-application-fc562.appspot.com/o/avatar_dog.jpg?alt=media&token=74491c13-a848-4cdc-85dd-39de10c393d9").getDownloadUrl().toString();
+        String imageCat = fStorage.getReferenceFromUrl("https://firebasestorage.googleapis.com/v0/b/pet-care-application-fc562.appspot.com/o/avatar_cat.jpg?alt=media&token=133f7529-89bd-4fd9-aba2-77542a724d1a").getDownloadUrl().toString();
+
+//        storageReference = FirebaseStorage.getInstance().getReferenceFromUrl("https://firebasestorage.googleapis.com/v0/b/pet-care-application-fc562.appspot.com/o/avatar_dog.jpg?alt=media&token=74491c13-a848-4cdc-85dd-39de10c393d9");
+//        storageReference2 = FirebaseStorage.getInstance().getReferenceFromUrl("https://firebasestorage.googleapis.com/v0/b/pet-care-application-fc562.appspot.com/o/avatar_cat.jpg?alt=media&token=133f7529-89bd-4fd9-aba2-77542a724d1a");
+
+//        String imageDog = storageReference.child("avatar_dog.jpg").getDownloadUrl().toString();
+//        String imageCat = storageReference2.child("avatar_cat.jpg").getDownloadUrl().toString();
 
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("uid", uid);
@@ -188,8 +201,36 @@ public class Registration extends AppCompatActivity {
         hashMap.put("petage", petage);
         hashMap.put("petgender", petgender);
 
+//        Task<Uri> imageDog = storageReference2.child("avatar_dog.jpg").getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+//            @Override
+//            public void onComplete(@NonNull Task<Uri> task) {
+//                if (task.isSuccessful()){
+//                    Uri uri = task.getResult();
+//                    imgDog = uri.toString();
+//                }
+//            }
+//        });
+
+//        Task<Uri> imageCat = storageReference2.child("avatar_cat.jpg").getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+//            @Override
+//            public void onComplete(@NonNull Task<Uri> task) {
+//                if (task.isSuccessful()){
+//                    Uri uri1 = task.getResult();
+//                    imgCat = uri1.toString();
+//                }
+//            }
+//        });
+
+        if (spn_type.getSelectedItem().equals("Male, Dog") || spn_type.getSelectedItem().equals("Female, Dog") ){
+            hashMap.put("image", imageDog);
+        }
+        else if (spn_type.getSelectedItem().equals("Male, Cat")|| spn_type.getSelectedItem().equals("Female, Cat")){
+            hashMap.put("image", imageCat);
+        }
+
         reference = FirebaseDatabase.getInstance().getReference("UserData");
 
         reference.child(uid).setValue(hashMap);
+
     }
 }
