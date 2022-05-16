@@ -1,7 +1,9 @@
 package com.example.petcare;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,8 +13,16 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.petcare.adapterDogTips.DogTipsAdapterFirebase;
+import com.example.petcare.adapterPetDiary.PetDiaryAdapterFirebase;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -64,8 +74,11 @@ public class DiaryFragment extends Fragment {
     }
 
     DatabaseReference reference;
-    RecyclerView petProfileRecycler;
-    ArrayList<UserDataFirebase> userPetList;
+    FirebaseAuth fAuth;
+    RecyclerView petDiaryRecycler;
+    PetDiaryFirebase petDiaryFirebase;
+    ArrayList<PetDiaryFirebase> diaryList;
+    PetDiaryAdapterFirebase petDiaryAdapterFirebase;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -74,18 +87,62 @@ public class DiaryFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_diary, container, false);
 
         TextView tv_title = (TextView)view.findViewById(R.id.tv_petdiary);
-        RelativeLayout petProfileView = (RelativeLayout)view.findViewById(R.id.petProfileView);
-        petProfileRecycler = (RecyclerView)view.findViewById(R.id.petProfileRecycler);
+        FloatingActionButton floatingActionButton = view.findViewById(R.id.fbtn_adddiary);
+        RelativeLayout petDiaryView = (RelativeLayout)view.findViewById(R.id.petDiaryView);
+        petDiaryRecycler = (RecyclerView)view.findViewById(R.id.petDiaryRecycler);
 
-        reference = FirebaseDatabase.getInstance().getReference();
+        reference = FirebaseDatabase.getInstance().getReference("Diary");
 
         //for pet diary recyclerview
-        userPetList = new ArrayList<>();
-        GetPetDataFromFirebase();
+        diaryList = new ArrayList<>();
+        GetDiaryDataFromFirebase();
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(),Diary3rdPage.class);
+                startActivity(intent);
+            }
+        });
 
         return view;
     }
 
-    private void GetPetDataFromFirebase() {
+    //retrieve diary data from database
+    private void GetDiaryDataFromFirebase() {
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                //clear list at start
+                diaryList.clear();
+
+                for (DataSnapshot ds : dataSnapshot.getChildren()){
+                    petDiaryFirebase = ds.getValue(PetDiaryFirebase.class);
+                    diaryList.add(petDiaryFirebase);
+
+//                    PetDiaryFirebase petDiaryFirebase = new PetDiaryFirebase();
+
+//                    petDiaryFirebase.setPetName(ds.child("petname").getValue().toString());
+//                    petDiaryFirebase.setTime(ds.child("time").getValue().toString());
+//                    petDiaryFirebase.setDate(ds.child("date").getValue().toString());
+//                    petDiaryFirebase.setFoodIntake(ds.child("foodIntake").getValue().toString());
+//                    petDiaryFirebase.setWaterIntake(ds.child("waterIntake").getValue().toString());
+//                    petDiaryFirebase.setOutdoor(ds.child("outdoor").getValue().toString());
+//                    petDiaryFirebase.setHealth(ds.child("health").getValue().toString());
+//                   diaryList.add(petDiaryFirebase);
+                }
+
+                //setup adapter
+                petDiaryAdapterFirebase = new PetDiaryAdapterFirebase(getActivity(),diaryList);
+                //set adapter to recyclerview
+                //dogtipsRecycler.setLayoutManager(linearLayoutManager);
+                petDiaryRecycler.setAdapter(petDiaryAdapterFirebase);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }

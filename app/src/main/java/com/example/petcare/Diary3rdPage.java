@@ -1,9 +1,11 @@
 package com.example.petcare;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -13,18 +15,22 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
+import java.util.HashMap;
 
 public class Diary3rdPage extends AppCompatActivity {
 
     Button btnSave;
-    EditText etTime, etDate, etFoodIntake, etWaterIntake, etOutdoor, etHealth;
+    EditText etPetName, etTime, etDate, etFoodIntake, etWaterIntake, etOutdoor, etHealth;
     String time;
     int year, month, day, hour, minute;
     ProgressBar progressBar;
@@ -39,12 +45,14 @@ public class Diary3rdPage extends AppCompatActivity {
         setContentView(R.layout.activity_diary3rd_page);
 
         btnSave = findViewById(R.id.btn_save);
+        etPetName = findViewById(R.id.et_petName);
         etTime = findViewById(R.id.et_time);
         etDate = findViewById(R.id.et_date);
         etFoodIntake = findViewById(R.id.et_foodIntake);
         etWaterIntake = findViewById(R.id.et_waterIntake);
         etOutdoor = findViewById(R.id.et_outdoor);
         etHealth = findViewById(R.id.et_health);
+        progressBar = findViewById(R.id.progressBar);
 
         fAuth = FirebaseAuth.getInstance();
         fUser = fAuth.getCurrentUser();
@@ -90,12 +98,12 @@ public class Diary3rdPage extends AppCompatActivity {
             }
         });
 
-
-
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                saveDiaryData();
+                PerforAuth();
+                Intent intent = new Intent(Diary3rdPage.this,DiaryFragment.class);
+                startActivity(intent);
             }
         });
 
@@ -123,13 +131,20 @@ public class Diary3rdPage extends AppCompatActivity {
         return time;
     }
 
-    private void saveDiaryData() {
+    private void PerforAuth() {
+        String uid = fAuth.getUid();
+        String petName = etPetName.getText().toString();
         String time = etTime.getText().toString();
         String date = etDate.getText().toString();
         String foodIntake = etFoodIntake.getText().toString();
         String waterIntake = etWaterIntake.getText().toString();
         String outdoor = etOutdoor.getText().toString();
         String health = etHealth.getText().toString();
+
+        if(petName.isEmpty()){
+            etPetName.setError("Pet Name is required!");
+            etPetName.requestFocus();
+        }
 
         if(time.isEmpty()){
             etTime.setError("Time is required!");
@@ -156,8 +171,52 @@ public class Diary3rdPage extends AppCompatActivity {
             etHealth.setError("Health note is required!");
             etHealth.requestFocus();
         }
+        else{
+            saveDiaryData();
+        }
+
+
+
+    }
+
+    private void saveDiaryData() {
+        String uid = fAuth.getUid();
+        String petName = etPetName.getText().toString();
+        String time = etTime.getText().toString();
+        String date = etDate.getText().toString();
+        String foodIntake = etFoodIntake.getText().toString();
+        String waterIntake = etWaterIntake.getText().toString();
+        String outdoor = etOutdoor.getText().toString();
+        String health = etHealth.getText().toString();
 
         //firebase save diary data function
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("uid", uid);
+        hashMap.put("petname", petName);
+        hashMap.put("time", time);
+        hashMap.put("date", date);
+        hashMap.put("foodIntake", foodIntake);
+        hashMap.put("waterIntake", waterIntake);
+        hashMap.put("outdoor", outdoor);
+        hashMap.put("health", health);
 
+        progressBar.setVisibility(View.VISIBLE);
+        reference = FirebaseDatabase.getInstance().getReference("Diary");
+        String diaryId = reference.push().getKey();
+        reference.child(uid).child(diaryId).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()){
+                    Toast.makeText(Diary3rdPage.this, "Diary Saved!",
+                            Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
+                }
+                else{
+                    Toast.makeText(Diary3rdPage.this, "Failed Saved", Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
+                }
+
+            }
+        });
     }
 }

@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/cream2_bg"
     android:orientation="vertical"
     android:padding="0dp"
     android:paddingStart="10dp"
@@ -23,11 +22,13 @@
         android:layout_marginTop="0dp"
         android:layout_marginRight="0dp"
         android:layout_marginBottom="0dp"
+        android:clickable="true"
         android:padding="10dp"
         android:paddingStart="10dp"
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
         android:paddingEnd="10dp"
+        app:cardBackgroundColor="#D3FFFFFF"
         app:cardCornerRadius="16dp"
         app:cardUseCompatPadding="true">
 
@@ -41,7 +42,7 @@
             android:layout_marginBottom="0dp">
 
             <TextView
-                android:id="@+id/tv_date_time"
+                android:id="@+id/tv_dPetname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -49,7 +50,9 @@
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="8dp"
+                android:text="Doggy"
                 android:textAlignment="viewStart"
+                android:textColor="#722F37"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -70,14 +73,16 @@
                 android:id="@+id/tv_food_intake"
                 android:layout_width="270dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tv_date_time"
-                android:layout_alignEnd="@+id/tv_date_time"
+                android:layout_below="@id/tv_dPetname"
+                android:layout_alignEnd="@+id/tv_dPetname"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
+                android:text="Pedigree"
                 android:textAlignment="viewStart"
+                android:textColor="#722F37"
                 android:textSize="18sp" />
 
             <ImageView
@@ -105,7 +110,9 @@
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="0dp"
                 android:layout_marginBottom="16dp"
+                android:text="1000ml"
                 android:textAlignment="viewStart"
+                android:textColor="#722F37"
                 android:textSize="18sp" />
 
             <ImageView
@@ -120,6 +127,7 @@
                 android:layout_marginEnd="2dp"
                 android:layout_marginBottom="0dp"
                 android:layout_toStartOf="@+id/tv_outdoor_note"
+                android:visibility="gone"
                 app:srcCompat="@drawable/dog_park_24px" />
 
             <TextView
@@ -134,7 +142,8 @@
                 android:layout_marginEnd="0dp"
                 android:layout_marginBottom="16dp"
                 android:textAlignment="viewStart"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/tv_health_note"
@@ -146,7 +155,8 @@
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="16dp"
                 android:textAlignment="viewStart"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:visibility="gone" />
 
             <ImageView
                 android:id="@+id/imageView4"
@@ -160,7 +170,40 @@
                 android:layout_marginEnd="0dp"
                 android:layout_marginBottom="2dp"
                 android:layout_toStartOf="@+id/tv_outdoor_note"
+                android:visibility="gone"
                 app:srcCompat="@drawable/health2_100px" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_water_intake">
+
+                <TextView
+                    android:id="@+id/tvdate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:text="16/5/2022"
+                    android:textColor="#722F37"
+                    android:textSize="14dp" />
+
+                <ImageView
+                    android:id="@+id/delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:paddingRight="5dp"
+                    android:src="@drawable/ic_baseline_close_24" />
+
+                <ImageView
+                    android:id="@+id/edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@id/delete"
+                    android:paddingRight="8dp"
+                    android:src="@drawable/ic_baseline_edit_24" />
+
+            </RelativeLayout>
 
         </RelativeLayout>
 

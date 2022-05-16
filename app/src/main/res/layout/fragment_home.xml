@@ -57,7 +57,7 @@
             tools:layout_editor_absoluteY="0dp">
 
             <ImageView
-                android:id="@+id/img_pet3"
+                android:id="@+id/img_tips"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:scaleType="centerCrop"
@@ -212,6 +212,7 @@
 
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cv_hDiary"
             android:layout_width="140dp"
             android:layout_height="143dp"
             android:layout_marginStart="15dp"
@@ -327,18 +328,7 @@
 
     </androidx.cardview.widget.CardView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        app:layout_constraintBottom_toBottomOf="@+id/textView5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.911"
-        app:layout_constraintStart_toEndOf="@+id/textView5"
-        app:layout_constraintTop_toTopOf="@+id/textView5"
-        app:rippleColor="#FA7A47"
-        app:srcCompat="@drawable/ic_baseline_add_24" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

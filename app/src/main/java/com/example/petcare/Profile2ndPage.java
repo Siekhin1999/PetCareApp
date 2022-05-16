@@ -40,6 +40,7 @@ public class Profile2ndPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile2nd_page);
+//        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new ProfileFragment()).addToBackStack(null).commit();
 
         tvpetname = findViewById(R.id.tv_petname);
         tvpetage = findViewById(R.id.tv_petage);
@@ -82,7 +83,7 @@ public class Profile2ndPage extends AppCompatActivity {
                 tvemail.setText("Email: " + dataSnapshot.child("email").getValue());
                 //imageView.setImageURI((Uri) dataSnapshot.child("image").getValue());
                 String image = (String) dataSnapshot.child("image").getValue();
-                //Glide.with(Profile2ndPage.this).load(image).into(imageView);
+                Glide.with(Profile2ndPage.this).load(image).into(imageView);
 
 
 

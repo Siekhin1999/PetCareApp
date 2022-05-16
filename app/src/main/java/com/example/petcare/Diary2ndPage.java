@@ -26,23 +26,23 @@ public class Diary2ndPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diary2nd_page);
 
-        TextView tv_title = findViewById(R.id.tv_petdiary);
-        petDiaryRecycler = findViewById(R.id.petDiaryRecycler);
-        FloatingActionButton floatingActionButton = findViewById(R.id.btn_adddiary);
+//        TextView tv_title = findViewById(R.id.tv_petdiary);
+//        petDiaryRecycler = findViewById(R.id.petDiaryRecycler);
+//        FloatingActionButton floatingActionButton = findViewById(R.id.btn_adddiary);
 
-        reference = FirebaseDatabase.getInstance().getReference();
+//        reference = FirebaseDatabase.getInstance().getReference();
 
         //for pet diary recyclerview
-        diarylist = new ArrayList<>();
-        GetDiaryDataFromFirebase();
+//        diarylist = new ArrayList<>();
+//        GetDiaryDataFromFirebase();
 
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Diary2ndPage.this, Diary3rdPage.class);
-                startActivity(intent);
-            }
-        });
+//        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+///            public void onClick(View view) {
+//                Intent intent = new Intent(Diary2ndPage.this, Diary3rdPage.class);
+//                startActivity(intent);
+//            }
+//        });
     }
 
     private void GetDiaryDataFromFirebase() {

@@ -1,13 +1,19 @@
 package com.example.petcare;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,7 +67,64 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home,container,false);
-        final TextView dashboard = (TextView) view.findViewById(R.id.tv_dashboard);
+
+        TextView dashboard = (TextView) view.findViewById(R.id.tv_dashboard);
+        CardView cardTips = view.findViewById(R.id.btn_changephoto);
+        CardView cardDiary = view.findViewById(R.id.btn_diary);
+        CardView cardTraining = view.findViewById(R.id.btn_training);
+        ImageView imgTips = view.findViewById(R.id.img_tips);
+        ImageView imgDiary = view.findViewById(R.id.img_diary);
+        ImageView imgTraining = view.findViewById(R.id.imgtraining);
+        ImageView imgLogout = view.findViewById(R.id.btn_imglogout);
+
+        CardView cardView = view.findViewById(R.id.cv_hDiary);
+        ImageView imgPet = view.findViewById(R.id.img_pet2);
+        TextView tvDate = view.findViewById(R.id.tv_date);
+        TextView tvEat = view.findViewById(R.id.tv_eat);
+        TextView tvWater = view.findViewById(R.id.tv_water);
+        TextView tvPark = view.findViewById(R.id.tv_park);
+
+        imgTips.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), TipsFragment.class);
+                startActivity(intent);
+            }
+        });
+
+        imgDiary.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent2 = new Intent(getActivity(), DiaryFragment.class);
+                startActivity(intent2);
+            }
+        });
+
+        imgTraining.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent3 = new Intent(getActivity(), TrainingFragment.class);
+                startActivity(intent3);
+            }
+        });
+
+        imgLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                Toast.makeText(getActivity(), "You've Successfully Logout!", Toast.LENGTH_SHORT).show();
+                Intent intent4 = new Intent(getActivity(), Login.class);
+                intent4.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent4);
+            }
+        });
+
+        //show diary history
+
+
+
+
+
 
         // Inflate the layout for this fragment
         return view;
