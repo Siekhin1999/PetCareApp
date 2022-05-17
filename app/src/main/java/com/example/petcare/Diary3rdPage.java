@@ -57,12 +57,12 @@ public class Diary3rdPage extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
         fUser = fAuth.getCurrentUser();
 
-        Calendar calendar = Calendar.getInstance();
-        final int year = calendar.get(Calendar.YEAR);
-        final int month = calendar.get(Calendar.MONTH);
-        final int day = calendar.get(Calendar.DAY_OF_MONTH);
-        final int hour = calendar.get(Calendar.HOUR);
-        final int minute = calendar.get(Calendar.MINUTE);
+        final Calendar calendar = Calendar.getInstance();
+        year = calendar.get(Calendar.YEAR);
+        month = calendar.get(Calendar.MONTH);
+        day = calendar.get(Calendar.DAY_OF_MONTH);
+        hour = calendar.get(Calendar.HOUR);
+        minute = calendar.get(Calendar.MINUTE);
 
         etDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,8 +102,6 @@ public class Diary3rdPage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 PerforAuth();
-                Intent intent = new Intent(Diary3rdPage.this,DiaryFragment.class);
-                startActivity(intent);
             }
         });
 
@@ -146,7 +144,7 @@ public class Diary3rdPage extends AppCompatActivity {
             etPetName.requestFocus();
         }
 
-        if(time.isEmpty()){
+        else if(time.isEmpty()){
             etTime.setError("Time is required!");
             etTime.requestFocus();
         }
@@ -174,12 +172,13 @@ public class Diary3rdPage extends AppCompatActivity {
         else{
             saveDiaryData();
         }
-
-
-
     }
 
     private void saveDiaryData() {
+        progressBar.setVisibility(View.VISIBLE);
+        reference = FirebaseDatabase.getInstance().getReference("Diary");
+
+        String diaryId = reference.push().getKey();
         String uid = fAuth.getUid();
         String petName = etPetName.getText().toString();
         String time = etTime.getText().toString();
@@ -189,7 +188,6 @@ public class Diary3rdPage extends AppCompatActivity {
         String outdoor = etOutdoor.getText().toString();
         String health = etHealth.getText().toString();
 
-        //firebase save diary data function
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("uid", uid);
         hashMap.put("petname", petName);
@@ -200,22 +198,25 @@ public class Diary3rdPage extends AppCompatActivity {
         hashMap.put("outdoor", outdoor);
         hashMap.put("health", health);
 
-        progressBar.setVisibility(View.VISIBLE);
-        reference = FirebaseDatabase.getInstance().getReference("Diary");
-        String diaryId = reference.push().getKey();
         reference.child(uid).child(diaryId).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()){
-                    Toast.makeText(Diary3rdPage.this, "Diary Saved!",
-                            Toast.LENGTH_SHORT).show();
+                    etPetName.getText().clear();
+                    etTime.getText().clear();
+                    etDate.getText().clear();
+                    etFoodIntake.getText().clear();
+                    etWaterIntake.getText().clear();
+                    etOutdoor.getText().clear();
+                    etHealth.getText().clear();
+
+                    Toast.makeText(Diary3rdPage.this, "Diary Saved!", Toast.LENGTH_SHORT).show();
                     progressBar.setVisibility(View.GONE);
                 }
                 else{
                     Toast.makeText(Diary3rdPage.this, "Failed Saved", Toast.LENGTH_SHORT).show();
                     progressBar.setVisibility(View.GONE);
                 }
-
             }
         });
     }

@@ -7,18 +7,20 @@ public class UserDataFirebase {
     String userName;
     String Email;
     String userId;
+    String Image;
 
     UserDataFirebase(){
 
     }
 
-    public UserDataFirebase(String petName, String petAge, String petGender, String userName, String email, String userId) {
+    public UserDataFirebase(String petName, String petAge, String petGender, String userName, String email, String userId, String image) {
         PetName = petName;
         PetAge = petAge;
         PetGender = petGender;
         this.userName = userName;
         Email = email;
         this.userId = userId;
+        Image = image;
     }
 
     public String getPetName() {
@@ -67,5 +69,13 @@ public class UserDataFirebase {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getImage() {
+        return Image;
+    }
+
+    public void setImage(String image) {
+        Image = image;
     }
 }

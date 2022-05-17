@@ -7,7 +7,7 @@ import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-public class UploadProfilePicActivity extends AppCompatActivity {
+public class AddPetProfile extends AppCompatActivity {
 
     ProgressBar progressBar;
     ImageView imageView;
@@ -20,11 +20,8 @@ public class UploadProfilePicActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_upload_profile_pic);
+        setContentView(R.layout.activity_add_pet_profile);
 
-        getSupportActionBar().setTitle("Upload Profile Picture");
-
-        //creating actionbar menu
 
     }
 }

@@ -3,14 +3,28 @@ package com.example.petcare;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.example.petcare.adapterPetDiary.PetDiaryAdapterFirebase;
+import com.example.petcare.adapterPetProfile.PetProfileAdapterFirebase;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -62,24 +76,83 @@ public class ProfileFragment extends Fragment {
     }
 
     DatabaseReference reference;
-    ArrayList<UserDataFirebase> userdataLists;
+    FirebaseAuth fAuth;
+    FirebaseUser fUser;
+    GridLayoutManager gridLayoutManager;
+    RecyclerView petProfileRecycler;
+    UserDataFirebase userDataFirebase;
+    ArrayList<UserDataFirebase> userPetList;
+    PetProfileAdapterFirebase petProfileAdapterFirebase;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
-//        ImageView btnPetprofile = (ImageView) view.findViewById(R.id.btn_petprofile);
-        CardView btnprofile = (CardView)view.findViewById(R.id.btn_profile);
-        btnprofile.setOnClickListener(new View.OnClickListener() {
+        TextView tv_title = (TextView)view.findViewById(R.id.tv_petprofile);
+        FloatingActionButton floatingActionButton = view.findViewById(R.id.fbtn_addpet);
+        RelativeLayout petProfileView = (RelativeLayout)view.findViewById(R.id.petProfileView);
+        gridLayoutManager = new GridLayoutManager(getActivity(),2);
+        petProfileRecycler = (RecyclerView)view.findViewById(R.id.petProfileRecycler);
+
+        fAuth = FirebaseAuth.getInstance();
+        fUser = fAuth.getCurrentUser();
+        reference = FirebaseDatabase.getInstance().getReference("UserData");
+
+        //for pet profile recyclerview
+        userPetList = new ArrayList<>();
+        GetPetDataFromFirebase();
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), Profile2ndPage.class);
+                Intent intent = new Intent(getActivity(),AddPetProfile.class);
                 startActivity(intent);
             }
         });
+//        btnprofile.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getActivity(), Profile2ndPage.class);
+//                startActivity(intent);
+//            }
+//        });
 
         // Inflate the layout for this fragment
         return view;
+    }
+
+    private void GetPetDataFromFirebase() {
+        reference.child(fAuth.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                //clear list at start
+                userPetList.clear();
+
+                for (DataSnapshot ds : dataSnapshot.getChildren()){
+                    UserDataFirebase userDataFirebase = new UserDataFirebase();
+                    userDataFirebase.setPetName(ds.child("petname").getValue().toString());
+                    userDataFirebase.setPetAge(ds.child("petage").getValue().toString());
+                    userDataFirebase.setPetGender(ds.child("petgender").getValue().toString());
+                    userDataFirebase.setUserName(ds.child("name").getValue().toString());
+                    userDataFirebase.setEmail(ds.child("email").getValue().toString());
+                    userDataFirebase.setUserId(ds.child("uid").getValue().toString());
+                    userDataFirebase.setImage(ds.child("image").getValue().toString());
+                    userPetList.add(userDataFirebase);
+                }
+                //setup adapter
+                petProfileAdapterFirebase = new PetProfileAdapterFirebase(getActivity(),userPetList);
+                //set adapter to recyclerview
+                //petProfileRecycler.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+                petProfileRecycler.setAdapter(petProfileAdapterFirebase);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }

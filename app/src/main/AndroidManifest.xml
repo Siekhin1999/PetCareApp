@@ -18,7 +18,7 @@
             android:name=".Diary3rdPage"
             android:exported="false" />
         <activity
-            android:name=".Diary2ndPage"
+            android:name=".DiaryUpdate"
             android:exported="false" />
         <activity
             android:name=".DogTrainingDetailActivity"
@@ -33,7 +33,7 @@
             android:name=".DogTipsDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".UploadProfilePicActivity"
+            android:name=".AddPetProfile"
             android:exported="false" />
         <activity
             android:name=".Profile2ndPage"

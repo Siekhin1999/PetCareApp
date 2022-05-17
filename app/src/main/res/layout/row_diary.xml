@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:background="#6FFFFFFF"
+    android:backgroundTint="#70FFFFFF"
     android:orientation="vertical"
     android:padding="0dp"
     android:paddingStart="10dp"
@@ -22,13 +24,14 @@
         android:layout_marginTop="0dp"
         android:layout_marginRight="0dp"
         android:layout_marginBottom="0dp"
+        android:background="@drawable/cardview_bg"
         android:clickable="true"
         android:padding="10dp"
         android:paddingStart="10dp"
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
         android:paddingEnd="10dp"
-        app:cardBackgroundColor="#D3FFFFFF"
+        app:cardBackgroundColor="@android:color/transparent"
         app:cardCornerRadius="16dp"
         app:cardUseCompatPadding="true">
 
@@ -40,6 +43,14 @@
             android:layout_marginTop="0dp"
             android:layout_marginRight="0dp"
             android:layout_marginBottom="0dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:alpha="0.2"
+                android:background="@drawable/cardview_bg"
+                android:scaleType="centerCrop"
+                app:tint="#4BFFFFFF" />
 
             <TextView
                 android:id="@+id/tv_dPetname"
@@ -188,7 +199,7 @@
                     android:textSize="14dp" />
 
                 <ImageView
-                    android:id="@+id/delete"
+                    android:id="@+id/imgdelete"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -196,10 +207,10 @@
                     android:src="@drawable/ic_baseline_close_24" />
 
                 <ImageView
-                    android:id="@+id/edit"
+                    android:id="@+id/imgedit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toLeftOf="@id/delete"
+                    android:layout_toLeftOf="@id/imgdelete"
                     android:paddingRight="8dp"
                     android:src="@drawable/ic_baseline_edit_24" />
 

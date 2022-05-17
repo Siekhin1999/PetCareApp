@@ -55,7 +55,6 @@ public class Profile2ndPage extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         userRef = database.getReference("UserData");
 
-        //set onclickliner on imageview to open uploadprofileactivity
         btnchangephoto = findViewById(R.id.btn_changephoto);
         imageView = findViewById(R.id.img_pet3);
 
@@ -84,7 +83,6 @@ public class Profile2ndPage extends AppCompatActivity {
                 //imageView.setImageURI((Uri) dataSnapshot.child("image").getValue());
                 String image = (String) dataSnapshot.child("image").getValue();
                 Glide.with(Profile2ndPage.this).load(image).into(imageView);
-
 
 
             }

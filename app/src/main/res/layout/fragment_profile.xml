@@ -1,80 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/cream3_bg"
-    tools:context=".ProfileFragment">
+    android:background="@drawable/cream2_bg"
+    tools:context=".DiaryFragment">
 
     <TextView
         android:id="@+id/tv_petprofile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="30dp"
         android:fontFamily="@font/assistant"
-        android:text="My Pet Profile"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="Pet Profile"
+        android:textSize="28sp"
+        android:textStyle="bold" />
 
-    <androidx.cardview.widget.CardView
+    <RelativeLayout
+        android:id="@+id/petProfileView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tv_petprofile">
 
-        android:id="@+id/btn_profile"
-        android:layout_width="155dp"
-        android:layout_height="145dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="120dp"
-        android:layout_marginEnd="224dp"
-        android:clickable="true"
-        android:foreground="?android:attr/selectableItemBackground"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="2dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="SpeakableTextPresentCheck">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/petProfileRecycler"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-            <ImageView
-                android:id="@+id/img_pet"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:scaleType="centerCrop"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0"
-                app:srcCompat="@drawable/pawnouser" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fbtn_addpet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@id/petProfileRecycler"
+            android:layout_alignBottom="@id/petProfileRecycler"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="20dp"
+            android:clickable="true"
+            app:backgroundTint="#FA7A47"
+            app:tint="@color/colorWhite"
+            android:src="@drawable/ic_baseline_add_24"
+            tools:ignore="SpeakableTextPresentCheck" />
 
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_addpet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="38dp"
-        android:layout_marginBottom="38dp"
-        android:clickable="true"
-        android:src="@drawable/ic_baseline_add_24"
-        app:backgroundTint="#FA7A47"
-        app:layout_anchorGravity="bottom|end|right"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:maxImageSize="28dp"
-        app:tint="@color/colorWhite"
-        tools:ignore="SpeakableTextPresentCheck">
-
-    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+    </RelativeLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
