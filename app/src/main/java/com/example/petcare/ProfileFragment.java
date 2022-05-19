@@ -26,6 +26,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -106,7 +107,7 @@ public class ProfileFragment extends Fragment {
         fAuth = FirebaseAuth.getInstance();
         fUser = fAuth.getCurrentUser();
         mref = FirebaseDatabase.getInstance().getReference("UserData");
-        reference = FirebaseDatabase.getInstance().getReference("UserData").child(fAuth.getUid());
+        reference = FirebaseDatabase.getInstance().getReference("UserData");
 
         //for pet profile recyclerview
         userPetList = new ArrayList<>();
@@ -149,7 +150,8 @@ public class ProfileFragment extends Fragment {
 
     //for added pet
     private void GetPetDataFromFirebase() {
-        reference.addValueEventListener(new ValueEventListener() {
+        Query query = reference.child(fAuth.getUid()).orderByKey();
+        query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 //clear list at start
@@ -158,13 +160,13 @@ public class ProfileFragment extends Fragment {
                 for (DataSnapshot ds : dataSnapshot.getChildren()){
                     UserDataFirebase userDataFirebase = new UserDataFirebase();
 
-                    userDataFirebase.setPetPName("" + ds.child("petname").getValue());
-                    userDataFirebase.setPetAge("" + ds.child("petage").getValue());
-                    userDataFirebase.setPetGender("" + ds.child("petgender").getValue());
-                    userDataFirebase.setUserName("" + ds.child("name").getValue());
-                    userDataFirebase.setEmail("" + ds.child("email").getValue());
-                    userDataFirebase.setUserId("" + ds.child("uid").getValue());
-                    userDataFirebase.setImage("" + ds.child("image").getValue());
+                    userDataFirebase.setPetPName((String) ds.child("newPetname").getValue());
+                    userDataFirebase.setPetAge((String) ds.child("newPetage").getValue());
+                    userDataFirebase.setPetGender((String) ds.child("newPetType").getValue());
+//                    userDataFirebase.setUserName("" + ds.child("name").getValue().toString());
+//                    userDataFirebase.setEmail("" + ds.child("email").getValue().toString());
+                    userDataFirebase.setUserId((String) ds.child("uid").getValue());
+                    userDataFirebase.setImage((String) ds.child("image").getValue());
                     userPetList.add(userDataFirebase);
                 }
                 //setup adapter

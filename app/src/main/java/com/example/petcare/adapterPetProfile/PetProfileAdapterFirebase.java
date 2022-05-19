@@ -35,7 +35,7 @@ public class PetProfileAdapterFirebase extends RecyclerView.Adapter<PetProfileAd
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public PetProfileAdapterFirebase.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.row_petprofile,parent,false);
 
         return new PetProfileAdapterFirebase.ViewHolder(view);

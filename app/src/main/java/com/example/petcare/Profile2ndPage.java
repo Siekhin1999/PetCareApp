@@ -82,7 +82,7 @@ public class Profile2ndPage extends AppCompatActivity {
                 tvemail.setText("Email: " + dataSnapshot.child("email").getValue());
                 //imageView.setImageURI((Uri) dataSnapshot.child("image").getValue());
                 String image = (String) dataSnapshot.child("image").getValue();
-                Glide.with(Profile2ndPage.this).load(image).into(imageView);
+//                Glide.with(Profile2ndPage.this).load(image).into(imageView);
 
             }
 

@@ -22,6 +22,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 
@@ -73,6 +74,8 @@ public class HomeFragment extends Fragment {
 
     }
 
+    TextView tvPetname,tvDate, tvEat,tvWater,tvPark;
+    ImageView imgPet;
     FirebaseAuth fAuth;
     FirebaseUser fUser;
     FirebaseDatabase database;
@@ -94,11 +97,12 @@ public class HomeFragment extends Fragment {
         ImageView imgLogout = view.findViewById(R.id.btn_imglogout);
 
         CardView cardView = view.findViewById(R.id.cv_hDiary);
-        ImageView imgPet = view.findViewById(R.id.img_pet2);
-        TextView tvDate = view.findViewById(R.id.tv_date);
-        TextView tvEat = view.findViewById(R.id.tv_eat);
-        TextView tvWater = view.findViewById(R.id.tv_water);
-        TextView tvPark = view.findViewById(R.id.tv_park);
+        imgPet = view.findViewById(R.id.img_pet2);
+        tvPetname = view.findViewById(R.id.tv_dpetname);
+        tvDate = view.findViewById(R.id.tv_date);
+        tvEat = view.findViewById(R.id.tv_eat);
+        tvWater = view.findViewById(R.id.tv_water);
+        tvPark = view.findViewById(R.id.tv_park);
 
         imgTips.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,22 +150,24 @@ public class HomeFragment extends Fragment {
 
         fAuth = FirebaseAuth.getInstance();
         fUser = fAuth.getCurrentUser();
-        reference = FirebaseDatabase.getInstance().getReference("Diary").child(fAuth.getUid());
+        reference = FirebaseDatabase.getInstance().getReference("Diary");
 
         //show diary history
-        reference.orderByKey().limitToLast(1).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String date = "" + dataSnapshot.child("date").getValue().toString();
-                String food = "" + dataSnapshot.child("foodIntake").getValue().toString();
-                String water = "" + dataSnapshot.child("waterIntake").getValue().toString();
-                String outdoor = "" + dataSnapshot.child("outdoor").getValue().toString();
+        ShowDiaryHistory();
 
-                tvDate.setText(date);
-                tvEat.setText(food);
-                tvWater.setText(water);
-                tvPark.setText(outdoor);
-            }
+//        reference.orderByKey().limitToLast(1).addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                String date = "" + dataSnapshot.child("date").getValue().toString();
+//                String food = "" + dataSnapshot.child("foodIntake").getValue().toString();
+//                String water = "" + dataSnapshot.child("waterIntake").getValue().toString();
+//                String outdoor = "" + dataSnapshot.child("outdoor").getValue().toString();
+
+//                tvDate.setText(date);
+//                tvEat.setText(food);
+//                tvWater.setText(water);
+//                tvPark.setText(outdoor);
+//            }
 //                tvEat.setText("" +dataSnapshot.child("foodIntake").getValue().toString());
 //                tvWater.setText("" +dataSnapshot.child("waterIntake").getValue().toString());
 //                tvPark.setText("" +dataSnapshot.child("outdoor").getValue().toString());
@@ -169,14 +175,45 @@ public class HomeFragment extends Fragment {
 //                Glide.with(getActivity()).load(image).into(imgPet);
 
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                throw databaseError.toException();
-            }
-        });
+//            @Override
+//           public void onCancelled(@NonNull DatabaseError databaseError) {
+//                throw databaseError.toException();
+//            }
+//        });
 
 
         // Inflate the layout for this fragment
         return view;
+    }
+
+    //show diary history
+    private void ShowDiaryHistory() {
+        Query query = reference.child(fAuth.getUid()).orderByKey().limitToLast(1);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()){
+                    String name = "" + ds.child("petname").getValue().toString();
+                    String date = "" + ds.child("date").getValue().toString();
+                    String food = "" + ds.child("foodIntake").getValue().toString();
+                    String water = "" + ds.child("waterIntake").getValue().toString();
+                    String outdoor = "" + ds.child("outdoor").getValue().toString();
+//                    String image = (String) dataSnapshot.child("image").getValue();
+//                    Glide.with(getActivity()).load(image).into(imgPet);
+
+                    tvPetname.setText(name);
+                    tvDate.setText(date);
+                    tvEat.setText(food);
+                    tvWater.setText(water);
+                    tvPark.setText(outdoor);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
     }
 }

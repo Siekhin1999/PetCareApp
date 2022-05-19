@@ -175,7 +175,7 @@ public class Registration extends AppCompatActivity {
     }
 
     private void sendUserData() {
-//        String profileid = reference.push().getKey();
+        String profileid = reference.push().getKey();
         String uid = fAuth.getUid();
         String name = etName.getText().toString();
         String email = etEmail.getText().toString();
@@ -230,7 +230,7 @@ public class Registration extends AppCompatActivity {
 
         reference = FirebaseDatabase.getInstance().getReference("UserData");
 
-        reference.child(uid).setValue(hashMap);
+        reference.child(uid).child(profileid).setValue(hashMap);
 
     }
 }

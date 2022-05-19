@@ -61,6 +61,8 @@ public class AddPetProfile extends AppCompatActivity {
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                reference = FirebaseDatabase.getInstance().getReference("UserData");
+//                if (reference.child(fAuth.getUid()).orderByKey()<=2)
                 PerforAuth();
             }
         });
