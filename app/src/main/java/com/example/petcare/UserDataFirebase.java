@@ -1,7 +1,7 @@
 package com.example.petcare;
 
 public class UserDataFirebase {
-    String PetName;
+    String PetPName;
     String PetAge;
     String PetGender;
     String userName;
@@ -13,8 +13,8 @@ public class UserDataFirebase {
 
     }
 
-    public UserDataFirebase(String petName, String petAge, String petGender, String userName, String email, String userId, String image) {
-        PetName = petName;
+    public UserDataFirebase(String petpName, String petAge, String petGender, String userName, String email, String userId, String image) {
+        PetPName = petpName;
         PetAge = petAge;
         PetGender = petGender;
         this.userName = userName;
@@ -23,12 +23,12 @@ public class UserDataFirebase {
         Image = image;
     }
 
-    public String getPetName() {
-        return PetName;
+    public String getPetPName() {
+        return PetPName;
     }
 
-    public void setPetName(String petName) {
-        PetName = petName;
+    public void setPetPName(String petpName) {
+        PetPName = petpName;
     }
 
     public String getPetAge() {

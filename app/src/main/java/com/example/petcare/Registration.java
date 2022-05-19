@@ -126,7 +126,6 @@ public class Registration extends AppCompatActivity {
         else if(!password.equals(retype)){
             etRetype.setError("Password not matched!");
             etRetype.requestFocus();
-
         }
 
         else if(petname.isEmpty()){
@@ -176,6 +175,7 @@ public class Registration extends AppCompatActivity {
     }
 
     private void sendUserData() {
+//        String profileid = reference.push().getKey();
         String uid = fAuth.getUid();
         String name = etName.getText().toString();
         String email = etEmail.getText().toString();

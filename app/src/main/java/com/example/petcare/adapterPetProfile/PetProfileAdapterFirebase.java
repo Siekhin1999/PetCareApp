@@ -42,10 +42,10 @@ public class PetProfileAdapterFirebase extends RecyclerView.Adapter<PetProfileAd
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PetProfileAdapterFirebase.ViewHolder holder, int position) {
         //get data
         UserDataFirebase userDataFirebase = userPetList.get(position);
-        final String petName = userDataFirebase.getPetName();
+        final String petPName = userDataFirebase.getPetPName();
         final String petAge = userDataFirebase.getPetAge();
         final String petGender = userDataFirebase.getPetGender();
         final String username = userDataFirebase.getUserName();
@@ -54,7 +54,7 @@ public class PetProfileAdapterFirebase extends RecyclerView.Adapter<PetProfileAd
         String image = userDataFirebase.getImage();
 
         //set data
-        holder.tv_pet_name.setText(petName);
+        holder.tv_pet_name.setText(petPName);
         Glide.with(mContext)
                 .load(userPetList.get(position).getImage())
                 .into(holder.img_pet_profile);
@@ -84,11 +84,11 @@ public class PetProfileAdapterFirebase extends RecyclerView.Adapter<PetProfileAd
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(view.getContext(), "Pet: " + userPetList.get(getAdapterPosition()).getPetName(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(view.getContext(), "Pet: " + userPetList.get(getAdapterPosition()).getPetPName(),Toast.LENGTH_SHORT).show();
 
             Intent intent = new Intent(view.getContext(), Profile2ndPage.class);
             intent.putExtra("image", userPetList.get(getAdapterPosition()).getImage());
-            intent.putExtra("petname", userPetList.get(getAdapterPosition()).getPetName());
+            intent.putExtra("petname", userPetList.get(getAdapterPosition()).getPetPName());
             intent.putExtra("petage", userPetList.get(getAdapterPosition()).getPetAge());
             intent.putExtra("petgender", userPetList.get(getAdapterPosition()).getPetGender());
             intent.putExtra("name", userPetList.get(getAdapterPosition()).getUserName());

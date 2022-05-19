@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/cream2_bg"
+    android:background="@drawable/cream3_bg"
     tools:context=".DiaryFragment">
 
     <TextView
@@ -18,11 +18,64 @@
         android:textSize="28sp"
         android:textStyle="bold" />
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/btn_petProfile"
+        android:layout_width="350dp"
+        android:layout_height="170dp"
+        android:layout_below="@+id/tv_petprofile"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="32dp"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/img_pet3"
+                android:layout_width="wrap_content"
+                android:layout_height="120dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginBottom="16dp"
+                app:srcCompat="@drawable/pawnouser" />
+
+            <TextView
+                android:id="@+id/tv_profilepetname"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_pet3"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="Doggy"
+                android:textAlignment="center"
+                android:textSize="22sp"
+                android:textStyle="bold"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
     <RelativeLayout
         android:id="@+id/petProfileView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/tv_petprofile">
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/btn_petProfile">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/petProfileRecycler"
@@ -37,12 +90,12 @@
             android:layout_height="wrap_content"
             android:layout_alignRight="@id/petProfileRecycler"
             android:layout_alignBottom="@id/petProfileRecycler"
-            android:layout_marginBottom="20dp"
             android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
             android:clickable="true"
+            android:src="@drawable/ic_baseline_add_24"
             app:backgroundTint="#FA7A47"
             app:tint="@color/colorWhite"
-            android:src="@drawable/ic_baseline_add_24"
             tools:ignore="SpeakableTextPresentCheck" />
 
     </RelativeLayout>

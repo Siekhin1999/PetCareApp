@@ -3,8 +3,10 @@ package com.example.petcare;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +15,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -63,6 +73,12 @@ public class HomeFragment extends Fragment {
 
     }
 
+    FirebaseAuth fAuth;
+    FirebaseUser fUser;
+    FirebaseDatabase database;
+    FirebaseStorage fStorage;
+    DatabaseReference reference;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -87,24 +103,33 @@ public class HomeFragment extends Fragment {
         imgTips.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), TipsFragment.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(), TipsFragment.class);
+//                startActivity(intent);
+                Fragment fragment = new TipsFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container, fragment).commit();
             }
         });
 
         imgDiary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent2 = new Intent(getActivity(), DiaryFragment.class);
-                startActivity(intent2);
+//                Intent intent2 = new Intent(getActivity(), DiaryFragment.class);
+//                startActivity(intent2);
+                Fragment fragment2 = new DiaryFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container, fragment2).commit();
             }
         });
 
         imgTraining.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent3 = new Intent(getActivity(), TrainingFragment.class);
-                startActivity(intent3);
+//                Intent intent3 = new Intent(getActivity(), TrainingFragment.class);
+//                startActivity(intent3);
+                Fragment fragment3 = new TrainingFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container, fragment3).commit();
             }
         });
 
@@ -119,11 +144,36 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        fAuth = FirebaseAuth.getInstance();
+        fUser = fAuth.getCurrentUser();
+        reference = FirebaseDatabase.getInstance().getReference("Diary").child(fAuth.getUid());
+
         //show diary history
+        reference.orderByKey().limitToLast(1).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String date = "" + dataSnapshot.child("date").getValue().toString();
+                String food = "" + dataSnapshot.child("foodIntake").getValue().toString();
+                String water = "" + dataSnapshot.child("waterIntake").getValue().toString();
+                String outdoor = "" + dataSnapshot.child("outdoor").getValue().toString();
+
+                tvDate.setText(date);
+                tvEat.setText(food);
+                tvWater.setText(water);
+                tvPark.setText(outdoor);
+            }
+//                tvEat.setText("" +dataSnapshot.child("foodIntake").getValue().toString());
+//                tvWater.setText("" +dataSnapshot.child("waterIntake").getValue().toString());
+//                tvPark.setText("" +dataSnapshot.child("outdoor").getValue().toString());
+//                String image = (String) dataSnapshot.child("image").getValue();
+//                Glide.with(getActivity()).load(image).into(imgPet);
 
 
-
-
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                throw databaseError.toException();
+            }
+        });
 
 
         // Inflate the layout for this fragment

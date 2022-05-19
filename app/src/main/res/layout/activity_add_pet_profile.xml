@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/et_petName"
+        android:id="@+id/et_apetName"
         android:layout_width="320dp"
         android:layout_height="50dp"
         android:layout_marginTop="80dp"
@@ -38,7 +38,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_pagetitle" />
 
     <EditText
-        android:id="@+id/et_pet_age"
+        android:id="@+id/et_apet_age"
         android:layout_width="320dp"
         android:layout_height="50dp"
         android:layout_marginTop="50dp"
@@ -46,15 +46,15 @@
         android:drawableLeft="@drawable/gender_24px"
         android:ems="10"
         android:fontFamily="@font/assistant"
-        android:hint="Food Intake"
+        android:hint="Pet age"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.538"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_petName" />
+        app:layout_constraintTop_toBottomOf="@+id/et_apetName" />
 
     <Spinner
-        android:id="@+id/spn_type"
+        android:id="@+id/spn_addtype"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -62,7 +62,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_pet_age"
+        app:layout_constraintTop_toBottomOf="@+id/et_apet_age"
         tools:ignore="TouchTargetSizeCheck" />
 
     <Button

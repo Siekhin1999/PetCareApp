@@ -34,7 +34,7 @@ public class Profile2ndPage extends AppCompatActivity {
     FirebaseDatabase database;
     FirebaseStorage fStorage;
     DatabaseReference userRef;
-    private static final String USERS = "UserData";
+    //private static final String USERS = "UserData";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +83,6 @@ public class Profile2ndPage extends AppCompatActivity {
                 //imageView.setImageURI((Uri) dataSnapshot.child("image").getValue());
                 String image = (String) dataSnapshot.child("image").getValue();
                 Glide.with(Profile2ndPage.this).load(image).into(imageView);
-
 
             }
 
