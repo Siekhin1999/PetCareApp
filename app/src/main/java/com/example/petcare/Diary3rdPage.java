@@ -189,7 +189,7 @@ public class Diary3rdPage extends AppCompatActivity {
         String health = etHealth.getText().toString();
 
         HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("uid", uid);
+        hashMap.put("diaryid", diaryId);
         hashMap.put("petname", petName);
         hashMap.put("time", time);
         hashMap.put("date", date);

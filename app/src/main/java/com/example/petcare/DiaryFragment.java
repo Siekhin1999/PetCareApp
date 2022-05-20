@@ -126,13 +126,13 @@ public class DiaryFragment extends Fragment {
 
                     PetDiaryFirebase petDiaryFirebase = new PetDiaryFirebase();
 
-                    petDiaryFirebase.setPetName(ds.child("petname").getValue().toString());
-                    petDiaryFirebase.setTime(ds.child("time").getValue().toString());
-                    petDiaryFirebase.setDate(ds.child("date").getValue().toString());
-                    petDiaryFirebase.setFoodIntake(ds.child("foodIntake").getValue().toString());
-                    petDiaryFirebase.setWaterIntake(ds.child("waterIntake").getValue().toString());
-                    petDiaryFirebase.setOutdoor(ds.child("outdoor").getValue().toString());
-                    petDiaryFirebase.setHealth(ds.child("health").getValue().toString());
+                    petDiaryFirebase.setPetName((String) ds.child("petname").getValue());
+                    petDiaryFirebase.setTime((String)ds.child("time").getValue());
+                    petDiaryFirebase.setDate((String)ds.child("date").getValue());
+                    petDiaryFirebase.setFoodIntake((String)ds.child("foodIntake").getValue());
+                    petDiaryFirebase.setWaterIntake((String)ds.child("waterIntake").getValue());
+                    petDiaryFirebase.setOutdoor((String)ds.child("outdoor").getValue());
+                    petDiaryFirebase.setHealth((String)ds.child("health").getValue());
                     diaryList.add(petDiaryFirebase);
                 }
 

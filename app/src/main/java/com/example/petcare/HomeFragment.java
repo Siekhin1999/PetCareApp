@@ -193,11 +193,11 @@ public class HomeFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot ds : dataSnapshot.getChildren()){
-                    String name = "" + ds.child("petname").getValue().toString();
-                    String date = "" + ds.child("date").getValue().toString();
-                    String food = "" + ds.child("foodIntake").getValue().toString();
-                    String water = "" + ds.child("waterIntake").getValue().toString();
-                    String outdoor = "" + ds.child("outdoor").getValue().toString();
+                    String name = (String) "" + ds.child("petname").getValue();
+                    String date = (String)"" + ds.child("date").getValue();
+                    String food = (String)"" + ds.child("foodIntake").getValue();
+                    String water = (String)"" + ds.child("waterIntake").getValue();
+                    String outdoor = (String)"" + ds.child("outdoor").getValue();
 //                    String image = (String) dataSnapshot.child("image").getValue();
 //                    Glide.with(getActivity()).load(image).into(imgPet);
 

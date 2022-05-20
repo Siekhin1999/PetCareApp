@@ -1,6 +1,8 @@
 package com.example.petcare.adapterPetDiary;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,12 +15,22 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.petcare.DiaryFragment;
 import com.example.petcare.DiaryUpdate;
 import com.example.petcare.DogTipsDetailActivity;
 import com.example.petcare.DogTipsFirebase;
 import com.example.petcare.PetDiaryFirebase;
 import com.example.petcare.R;
 import com.example.petcare.adapterDogTips.DogTipsAdapterFirebase;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -26,10 +38,17 @@ public class PetDiaryAdapterFirebase extends RecyclerView.Adapter<PetDiaryAdapte
     private static final String  Tag = "RecyclerView";
     private Context mContext;
     private ArrayList<PetDiaryFirebase> diaryList;
+    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Diary");
+    FirebaseAuth fAuth = FirebaseAuth.getInstance();
+    FirebaseUser fUser = fAuth.getCurrentUser();
+//    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance().getReference("Diary");
 
     public PetDiaryAdapterFirebase(Context mContext, ArrayList<PetDiaryFirebase> diaryList) {
         this.mContext = mContext;
         this.diaryList = diaryList;
+        fAuth = FirebaseAuth.getInstance();
+        fUser = fAuth.getCurrentUser();
+        reference = FirebaseDatabase.getInstance().getReference("Diary");
     }
 
     @NonNull
@@ -58,6 +77,55 @@ public class PetDiaryAdapterFirebase extends RecyclerView.Adapter<PetDiaryAdapte
         holder.tv_foodintake.setText(foodIntake);
         holder.tv_waterintake.setText(waterIntake);
         holder.tv_date.setText(date);
+
+        holder.imgDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(holder.tv_dPetname.getContext());
+                alertDialog.setTitle("Delete Diary");
+                alertDialog.setMessage("Are you sure want to delete?");
+                alertDialog.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        reference.child(fAuth.getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                for (DataSnapshot ds : dataSnapshot.getChildren()){
+                                    ds.getRef().removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            Toast.makeText(mContext, "Diary Deleted", Toast.LENGTH_SHORT).show();
+                                            //notifyItemRemoved(position);
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(mContext, "Failed to delete diary", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+                    }
+                });
+
+                alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(holder.tv_dPetname.getContext(),"Canceled",Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                alertDialog.show();
+
+            }
+        });
 
     }
 
