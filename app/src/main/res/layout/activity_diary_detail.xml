@@ -4,6 +4,203 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DiaryDetailActivity">
+    android:background="@drawable/cream2_bg"
+    tools:context=".Diary3rdPage">
+
+    <TextView
+        android:id="@+id/tv_pagetitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/assistant"
+        android:text="Diary Update"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/et_update_petName"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/round_textfields"
+        android:drawableLeft="@drawable/dog_paw2_24px"
+        android:ems="10"
+        android:fontFamily="@font/assistant"
+        android:hint="Your Pet Name"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.538"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_pagetitle" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/et_update_date"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/round_textfields"
+        android:drawableLeft="@drawable/timeline_week_24px"
+        android:fontFamily="@font/assistant"
+        android:hint="Date"
+        android:outlineProvider="none"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.58"
+        app:layout_constraintStart_toEndOf="@+id/et_update_time"
+        app:layout_constraintTop_toBottomOf="@+id/et_update_petName"
+        tools:ignore="DuplicateIds" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/et_update_time"
+        android:layout_width="155dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/round_textfields"
+        android:drawableLeft="@drawable/time_32px"
+        android:fontFamily="@font/assistant"
+        android:hint="Time"
+        android:outlineProvider="none"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_update_petName"
+        tools:ignore="DuplicateIds" />
+
+    <EditText
+        android:id="@+id/et_update_foodIntake"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/round_textfields"
+        android:drawableLeft="@drawable/dog_bowl_24px"
+        android:ems="10"
+        android:fontFamily="@font/assistant"
+        android:hint="Food Intake"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.538"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_diet" />
+
+    <EditText
+        android:id="@+id/et_update_waterIntake"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/round_textfields"
+        android:drawableLeft="@drawable/water_24px"
+        android:ems="10"
+        android:fontFamily="@font/assistant"
+        android:hint="Water Intake"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.538"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_update_foodIntake" />
+
+    <TextView
+        android:id="@+id/tv_outdoor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="sans-serif"
+        android:text="Outdoor:"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/et_update_waterIntake"
+        app:layout_constraintTop_toBottomOf="@+id/et_update_waterIntake" />
+
+    <EditText
+        android:id="@+id/et_update_outdoor"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/round_textfields"
+        android:drawableLeft="@drawable/dog_park_24px"
+        android:ems="10"
+        android:fontFamily="@font/assistant"
+        android:hint="Note"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.538"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_outdoor" />
+
+    <TextView
+        android:id="@+id/tv_health"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="sans-serif"
+        android:text="Health:"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/et_update_outdoor"
+        app:layout_constraintTop_toBottomOf="@+id/et_update_outdoor" />
+
+    <EditText
+        android:id="@+id/et_update_health"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/round_textfields"
+        android:ems="10"
+        android:fontFamily="@font/assistant"
+        android:hint="Note"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.538"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_health" />
+
+    <Button
+        android:id="@+id/btn_update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/round_buttons"
+        android:fontFamily="@font/text_me_one"
+        android:text="update"
+        android:textAllCaps="true"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_update_health" />
+
+    <TextView
+        android:id="@+id/tv_diet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="sans-serif"
+        android:text="Diet:"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/et_update_time"
+        app:layout_constraintTop_toBottomOf="@+id/et_update_time" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

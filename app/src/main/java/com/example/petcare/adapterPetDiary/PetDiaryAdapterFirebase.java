@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.petcare.DiaryDetailActivity;
 import com.example.petcare.DiaryFragment;
 import com.example.petcare.DiaryUpdate;
 import com.example.petcare.DogTipsDetailActivity;
@@ -156,7 +157,7 @@ public class PetDiaryAdapterFirebase extends RecyclerView.Adapter<PetDiaryAdapte
         @Override
         public void onClick(View view) {
             Toast.makeText(view.getContext(), "Diary: " + diaryList.get(getAdapterPosition()).getPetName(),Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(view.getContext(), DiaryUpdate.class);
+            Intent intent = new Intent(view.getContext(), DiaryDetailActivity.class);
             intent.putExtra("petname", diaryList.get(getAdapterPosition()).getPetName());
             intent.putExtra("time", diaryList.get(getAdapterPosition()).getTime());
             intent.putExtra("date", diaryList.get(getAdapterPosition()).getDate());
@@ -164,6 +165,7 @@ public class PetDiaryAdapterFirebase extends RecyclerView.Adapter<PetDiaryAdapte
             intent.putExtra("waterIntake", diaryList.get(getAdapterPosition()).getWaterIntake());
             intent.putExtra("outdoor", diaryList.get(getAdapterPosition()).getOutdoor());
             intent.putExtra("health", diaryList.get(getAdapterPosition()).getHealth());
+            intent.putExtra("diaryId", diaryList.get(getAdapterPosition()).getDiaryId());
             view.getContext().startActivity(intent);
 
         }

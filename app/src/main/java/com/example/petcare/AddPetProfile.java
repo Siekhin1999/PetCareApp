@@ -31,6 +31,7 @@ public class AddPetProfile extends AppCompatActivity {
     ProgressBar progressBar;
     EditText et_apetName, et_apetage;
     Button btn_add;
+    String name, email, password;
     Spinner spn_addtype;
     FirebaseAuth fAuth;
     FirebaseUser fUser;
@@ -165,6 +166,7 @@ public class AddPetProfile extends AppCompatActivity {
         hashMap.put("newPetname", apetName);
         hashMap.put("newPetage", apetAge);
         hashMap.put("newPetType", apetType);
+
 
         if (spn_addtype.getSelectedItem().equals("Male, Dog") || spn_addtype.getSelectedItem().equals("Female, Dog") ){
             hashMap.put("image", imageDog);

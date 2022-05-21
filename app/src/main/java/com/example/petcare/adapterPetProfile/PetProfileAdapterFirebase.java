@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.example.petcare.DogTipsDetailActivity;
 import com.example.petcare.PetDiaryFirebase;
 import com.example.petcare.Profile2ndPage;
+import com.example.petcare.Profile2ndPage_addedpet;
 import com.example.petcare.R;
 import com.example.petcare.UserDataFirebase;
 import com.example.petcare.adapterPetDiary.PetDiaryAdapterFirebase;
@@ -86,11 +87,11 @@ public class PetProfileAdapterFirebase extends RecyclerView.Adapter<PetProfileAd
         public void onClick(View view) {
             Toast.makeText(view.getContext(), "Pet: " + userPetList.get(getAdapterPosition()).getPetPName(),Toast.LENGTH_SHORT).show();
 
-            Intent intent = new Intent(view.getContext(), Profile2ndPage.class);
+            Intent intent = new Intent(view.getContext(), Profile2ndPage_addedpet.class);
             intent.putExtra("image", userPetList.get(getAdapterPosition()).getImage());
-            intent.putExtra("petname", userPetList.get(getAdapterPosition()).getPetPName());
-            intent.putExtra("petage", userPetList.get(getAdapterPosition()).getPetAge());
-            intent.putExtra("petgender", userPetList.get(getAdapterPosition()).getPetGender());
+            intent.putExtra("newPetname", userPetList.get(getAdapterPosition()).getPetPName());
+            intent.putExtra("newPetage", userPetList.get(getAdapterPosition()).getPetAge());
+            intent.putExtra("newPetType", userPetList.get(getAdapterPosition()).getPetGender());
             intent.putExtra("name", userPetList.get(getAdapterPosition()).getUserName());
             intent.putExtra("email", userPetList.get(getAdapterPosition()).getEmail());
             intent.putExtra("uid", userPetList.get(getAdapterPosition()).getUserId());

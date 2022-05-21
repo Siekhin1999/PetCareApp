@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PetCare">
         <activity
+            android:name=".Profile2ndPage_addedpet"
+            android:exported="false" />
+        <activity
             android:name=".DiaryDetailActivity"
             android:exported="false" />
         <activity
