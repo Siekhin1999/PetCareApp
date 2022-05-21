@@ -44,7 +44,7 @@ public class DiaryDetailActivity extends AppCompatActivity {
         reference = FirebaseDatabase.getInstance().getReference("Diary").child(fAuth.getUid());
 
         Intent intent = getIntent();
-        diaryId = intent.getStringExtra("diaryId");
+        diaryId = intent.getStringExtra("diaryid");
 
         petname = intent.getStringExtra("petname");
         date = intent.getStringExtra("date");
