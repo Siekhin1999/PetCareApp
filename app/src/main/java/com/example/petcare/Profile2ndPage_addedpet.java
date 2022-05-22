@@ -68,7 +68,7 @@ public class Profile2ndPage_addedpet extends AppCompatActivity {
         });
 
         //show user information
-        userRef2.child(fAuth.getUid()).addValueEventListener(new ValueEventListener() {
+        userRef2.child(fAuth.getUid()).child("AddedPet").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 //successfully

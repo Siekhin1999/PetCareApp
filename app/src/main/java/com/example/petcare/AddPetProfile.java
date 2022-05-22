@@ -175,7 +175,7 @@ public class AddPetProfile extends AppCompatActivity {
             hashMap.put("image", imageCat);
         }
 
-        reference.child(fAuth.getUid()).child(newPetId).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+        reference.child(fAuth.getUid()).child("AddedPet").child(newPetId).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()){
@@ -185,6 +185,7 @@ public class AddPetProfile extends AppCompatActivity {
 
                     Toast.makeText(AddPetProfile.this, "New Pet Added!", Toast.LENGTH_SHORT).show();
                     progressBar.setVisibility(View.GONE);
+                    finish();
                 }
                 else {
                     Toast.makeText(AddPetProfile.this, "Failed Added", Toast.LENGTH_SHORT).show();

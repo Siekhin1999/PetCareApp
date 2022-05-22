@@ -120,16 +120,20 @@ public class ProfileFragment extends Fragment {
                 reference.child(fAuth.getUid()).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        //check if pet profile child more than 2
+                        //check if pet profile child less than 2
                         long num = snapshot.getChildrenCount();
-                        if (num >= 2){
-                            Toast.makeText(getActivity(), "Only can add 2 pets", Toast.LENGTH_SHORT).show();
-                        }
-                        else {
-                            //if pet profile child less than 2
+                        if (num < 2){
                             Intent intent = new Intent(getActivity(),AddPetProfile.class);
                             startActivity(intent);
                         }
+                        else if (num >= 2){
+                            //if pet profile child more than 2
+                            Toast.makeText(getActivity(), "Only can add 2 pets", Toast.LENGTH_SHORT).show();
+                        }
+//                        for (DataSnapshot ds : snapshot.getChildren()){
+
+
+//                        }
                     }
 
                     @Override
@@ -152,7 +156,7 @@ public class ProfileFragment extends Fragment {
         mref.child(fAuth.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                tvpetname.setText(dataSnapshot.child("name").getValue().toString());
+                tvpetname.setText(dataSnapshot.child("petname").getValue().toString());
                 String image = (String) dataSnapshot.child("image").getValue();
                 Glide.with(getActivity()).load(image).into(img3);
             }
@@ -169,7 +173,7 @@ public class ProfileFragment extends Fragment {
 
     //for added pet
     private void GetPetDataFromFirebase() {
-        Query query = reference.child(fAuth.getUid()).orderByKey();
+        Query query = reference.child(fAuth.getUid()).child("AddedPet");
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
