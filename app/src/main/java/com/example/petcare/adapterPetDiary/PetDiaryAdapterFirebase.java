@@ -48,7 +48,7 @@ public class PetDiaryAdapterFirebase extends RecyclerView.Adapter<PetDiaryAdapte
         this.mContext = mContext;
         this.diaryList = diaryList;
         fAuth = FirebaseAuth.getInstance();
-        fUser = fAuth.getCurrentUser();
+//        fUser = fAuth.getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference("Diary");
     }
 
@@ -88,31 +88,43 @@ public class PetDiaryAdapterFirebase extends RecyclerView.Adapter<PetDiaryAdapte
                 alertDialog.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        reference.child(fAuth.getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                for (DataSnapshot ds : dataSnapshot.getChildren()){
-                                    ds.getRef().removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void unused) {
-                                            Toast.makeText(mContext, "Diary Deleted", Toast.LENGTH_SHORT).show();
-                                            //notifyItemRemoved(position);
-                                        }
-                                    }).addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            Toast.makeText(mContext, "Failed to delete diary", Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
 
-                                }
+                        reference.child(fAuth.getCurrentUser().getUid()).child(diaryList.get(position).getDiaryId()).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(mContext, "Diary Deleted", Toast.LENGTH_SHORT).show();
                             }
-
+                        }).addOnFailureListener(new OnFailureListener() {
                             @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(mContext, "Failed to delete diary", Toast.LENGTH_SHORT).show();
                             }
                         });
+
+//                        reference.child(fAuth.getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+//                            @Override
+//                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                                for (DataSnapshot ds : dataSnapshot.getChildren()){
+//                                    ds.getRef().removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+//                                        @Override
+//                                        public void onSuccess(Void unused) {
+//                                            Toast.makeText(mContext, "Diary Deleted", Toast.LENGTH_SHORT).show();
+//                                            //notifyItemRemoved(position);
+//                                        }
+//                                    }).addOnFailureListener(new OnFailureListener() {
+//                                        @Override
+//                                        public void onFailure(@NonNull Exception e) {
+//                                            Toast.makeText(mContext, "Failed to delete diary", Toast.LENGTH_SHORT).show();
+//                                        }
+//                                    });
+//                                }
+//                            }
+
+//                            @Override
+//                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+//                            }
+//                        });
                     }
                 });
 

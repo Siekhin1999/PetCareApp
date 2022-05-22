@@ -3,6 +3,7 @@ package com.example.petcare;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -31,7 +33,7 @@ public class AddPetProfile extends AppCompatActivity {
     ProgressBar progressBar;
     EditText et_apetName, et_apetage;
     Button btn_add;
-    String name, email, password;
+    String name, email, password, image;
     Spinner spn_addtype;
     FirebaseAuth fAuth;
     FirebaseUser fUser;
@@ -56,8 +58,10 @@ public class AddPetProfile extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
 
         fAuth = FirebaseAuth.getInstance();
-        fUser = fAuth.getCurrentUser();
-        fStorage = FirebaseStorage.getInstance();
+        reference = FirebaseDatabase.getInstance().getReference("UserData");
+
+//        fUser = fAuth.getCurrentUser();
+//        fStorage = FirebaseStorage.getInstance();
 
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,8 +113,8 @@ public class AddPetProfile extends AppCompatActivity {
 //        String email = reference.child(fAuth.getUid()).child("email").getKey();
 //        String email = dataSnapshot.child("email").getValue().toString();
 //        String password = reference.child(fAuth.getUid()).child("password").getKey();
-        String imageDog = fStorage.getReferenceFromUrl("https://firebasestorage.googleapis.com/v0/b/pet-care-application-fc562.appspot.com/o/avatar_dog.jpg?alt=media&token=74491c13-a848-4cdc-85dd-39de10c393d9").getDownloadUrl().toString();
-        String imageCat = fStorage.getReferenceFromUrl("https://firebasestorage.googleapis.com/v0/b/pet-care-application-fc562.appspot.com/o/avatar_cat.jpg?alt=media&token=133f7529-89bd-4fd9-aba2-77542a724d1a").getDownloadUrl().toString();
+//        String imageDog = fStorage.getReferenceFromUrl("https://firebasestorage.googleapis.com/v0/b/pet-care-application-fc562.appspot.com/o/avatar_dog.jpg?alt=media&token=74491c13-a848-4cdc-85dd-39de10c393d9").getDownloadUrl().toString();
+//        String imageCat = fStorage.getReferenceFromUrl("https://firebasestorage.googleapis.com/v0/b/pet-care-application-fc562.appspot.com/o/avatar_cat.jpg?alt=media&token=133f7529-89bd-4fd9-aba2-77542a724d1a").getDownloadUrl().toString();
 
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("uid", uid);
@@ -169,29 +173,37 @@ public class AddPetProfile extends AppCompatActivity {
 
 
         if (spn_addtype.getSelectedItem().equals("Male, Dog") || spn_addtype.getSelectedItem().equals("Female, Dog") ){
-            hashMap.put("image", imageDog);
+            image = "avatar_dog.jpg";
         }
         else if (spn_addtype.getSelectedItem().equals("Male, Cat")|| spn_addtype.getSelectedItem().equals("Female, Cat")){
-            hashMap.put("image", imageCat);
+            image = "avatar_cat.jpg";
         }
 
-        reference.child(fAuth.getUid()).child("AddedPet").child(newPetId).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+        FirebaseStorage.getInstance().getReference(image).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()){
-                    et_apetName.getText().clear();
-                    et_apetage.getText().clear();
-                    //spn_addtype.getSelectedItem().toString();
+            public void onSuccess(Uri uri) {
+                hashMap.put("image",  uri.toString());
+                reference.child(fAuth.getUid()).child("AddedPet").child(newPetId).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()){
+                            et_apetName.getText().clear();
+                            et_apetage.getText().clear();
+                            //spn_addtype.getSelectedItem().toString();
 
-                    Toast.makeText(AddPetProfile.this, "New Pet Added!", Toast.LENGTH_SHORT).show();
-                    progressBar.setVisibility(View.GONE);
-                    finish();
-                }
-                else {
-                    Toast.makeText(AddPetProfile.this, "Failed Added", Toast.LENGTH_SHORT).show();
-                    progressBar.setVisibility(View.GONE);
-                }
+                            Toast.makeText(AddPetProfile.this, "New Pet Added!", Toast.LENGTH_SHORT).show();
+                            progressBar.setVisibility(View.GONE);
+                            finish();
+                        }
+                        else {
+                            Toast.makeText(AddPetProfile.this, "Failed Added", Toast.LENGTH_SHORT).show();
+                            progressBar.setVisibility(View.GONE);
+                        }
+                    }
+                });
             }
         });
+
+
     }
 }

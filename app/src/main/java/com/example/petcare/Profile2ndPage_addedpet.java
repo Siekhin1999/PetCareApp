@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -72,17 +73,14 @@ public class Profile2ndPage_addedpet extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 //successfully
-                for (DataSnapshot ds : dataSnapshot.getChildren()){
-                    tvaddpetname.setText("Pet Name: " + ds.child("newPetname").getValue());
-                    tvaddpetage.setText("Pet Age: " + ds.child("newPetage").getValue());
-                    tvaddgender.setText("Gender: " + ds.child("newPetType").getValue());
+                tvaddpetname.setText("Pet Name: " + dataSnapshot.child("newPetname").getValue());
+                tvaddpetage.setText("Pet Age: " + dataSnapshot.child("newPetage").getValue());
+                tvaddgender.setText("Gender: " + dataSnapshot.child("newPetType").getValue());
 //                tvusername.setText("Pet Owner: " + dataSnapshot.child("name").getValue());
 //                tvemail.setText("Email: " + dataSnapshot.child("email").getValue());
-                    //imageView.setImageURI((Uri) dataSnapshot.child("image").getValue());
-                    String image = (String) ds.child("image").getValue();
-//                Glide.with(Profile2ndPage.this).load(image).into(imageView);
-                }
-
+//                    imageView.setImageURI((Uri) dataSnapshot.child("image").getValue());
+                String image = (String) dataSnapshot.child("image").getValue();
+                Glide.with(Profile2ndPage_addedpet.this).load(image).into(imageView);
 
             }
 

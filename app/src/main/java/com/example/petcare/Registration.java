@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,14 +37,15 @@ public class Registration extends AppCompatActivity {
     EditText etName, etEmail, etPassword, etRetype, etPetname, etPetage;
     Spinner spn_type;
     TextView backLogin;
-    String imgDog="", imgCat="";
+//    String imgDog="", imgCat="";
+    String image;
     ProgressBar progressBar;
     FirebaseAuth fAuth;
-    FirebaseUser fUser;
-    FirebaseDatabase rootNode;
-    FirebaseStorage fStorage;
+//    FirebaseUser fUser;
+//    FirebaseDatabase rootNode;
+//    FirebaseStorage fStorage;
     DatabaseReference reference;
-    StorageReference storageReference, storageReference2;
+//    StorageReference storageReference, storageReference2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,8 +74,10 @@ public class Registration extends AppCompatActivity {
         });
 
         fAuth = FirebaseAuth.getInstance();
-        fUser = fAuth.getCurrentUser();
-        fStorage = FirebaseStorage.getInstance();
+        reference = FirebaseDatabase.getInstance().getReference("UserData");
+
+//        fUser = fAuth.getCurrentUser();
+//        fStorage = FirebaseStorage.getInstance();
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -175,7 +179,7 @@ public class Registration extends AppCompatActivity {
     }
 
     private void sendUserData() {
-        String profileid = reference.push().getKey();
+//        String profileid = reference.push().getKey();
         String uid = fAuth.getUid();
         String name = etName.getText().toString();
         String email = etEmail.getText().toString();
@@ -183,8 +187,8 @@ public class Registration extends AppCompatActivity {
         String petname = etPetname.getText().toString();
         String petage = etPetage.getText().toString();
         String petgender = spn_type.getSelectedItem().toString();
-        String imageDog = fStorage.getReferenceFromUrl("https://firebasestorage.googleapis.com/v0/b/pet-care-application-fc562.appspot.com/o/avatar_dog.jpg?alt=media&token=74491c13-a848-4cdc-85dd-39de10c393d9").getDownloadUrl().toString();
-        String imageCat = fStorage.getReferenceFromUrl("https://firebasestorage.googleapis.com/v0/b/pet-care-application-fc562.appspot.com/o/avatar_cat.jpg?alt=media&token=133f7529-89bd-4fd9-aba2-77542a724d1a").getDownloadUrl().toString();
+//        String imageDog = fStorage.getReferenceFromUrl("https://firebasestorage.googleapis.com/v0/b/pet-care-application-fc562.appspot.com/o/avatar_dog.jpg?alt=media&token=74491c13-a848-4cdc-85dd-39de10c393d9").getDownloadUrl().toString();
+//        String imageCat = fStorage.getReferenceFromUrl("https://firebasestorage.googleapis.com/v0/b/pet-care-application-fc562.appspot.com/o/avatar_cat.jpg?alt=media&token=133f7529-89bd-4fd9-aba2-77542a724d1a").getDownloadUrl().toString();
 
 //        storageReference = FirebaseStorage.getInstance().getReferenceFromUrl("https://firebasestorage.googleapis.com/v0/b/pet-care-application-fc562.appspot.com/o/avatar_dog.jpg?alt=media&token=74491c13-a848-4cdc-85dd-39de10c393d9");
 //        storageReference2 = FirebaseStorage.getInstance().getReferenceFromUrl("https://firebasestorage.googleapis.com/v0/b/pet-care-application-fc562.appspot.com/o/avatar_cat.jpg?alt=media&token=133f7529-89bd-4fd9-aba2-77542a724d1a");
@@ -222,15 +226,25 @@ public class Registration extends AppCompatActivity {
 //        });
 
         if (spn_type.getSelectedItem().equals("Male, Dog") || spn_type.getSelectedItem().equals("Female, Dog") ){
-            hashMap.put("image", imageDog);
+            image = "avatar_dog.jpg";
+//            hashMap.put("image",  FirebaseStorage.getInstance().getReferenceFromUrl("avatar_dog.jpg"));
         }
         else if (spn_type.getSelectedItem().equals("Male, Cat")|| spn_type.getSelectedItem().equals("Female, Cat")){
-            hashMap.put("image", imageCat);
+            image = "avatar_cat.jpg";
+//            hashMap.put("image",  FirebaseStorage.getInstance().getReferenceFromUrl("avatar_cat.jpg"));
         }
 
-        reference = FirebaseDatabase.getInstance().getReference("UserData");
+        FirebaseStorage.getInstance().getReference(image).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                hashMap.put("image",  uri.toString());
+                reference.child(uid).setValue(hashMap);
+            }
+        });
 
-        reference.child(uid).child(profileid).setValue(hashMap);
+//        reference = FirebaseDatabase.getInstance().getReference("UserData");
+
+//        reference.child(uid).setValue(hashMap);
 
     }
 }

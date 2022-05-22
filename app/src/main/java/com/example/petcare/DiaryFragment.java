@@ -124,16 +124,25 @@ public class DiaryFragment extends Fragment {
 //                    petDiaryFirebase = ds.getValue(PetDiaryFirebase.class);
 //                    diaryList.add(petDiaryFirebase);
 
-                    PetDiaryFirebase petDiaryFirebase = new PetDiaryFirebase();
+//                    PetDiaryFirebase petDiaryFirebase = new PetDiaryFirebase();
 
-                    petDiaryFirebase.setPetName((String) ds.child("petname").getValue());
-                    petDiaryFirebase.setTime((String)ds.child("time").getValue());
-                    petDiaryFirebase.setDate((String)ds.child("date").getValue());
-                    petDiaryFirebase.setFoodIntake((String)ds.child("foodIntake").getValue());
-                    petDiaryFirebase.setWaterIntake((String)ds.child("waterIntake").getValue());
-                    petDiaryFirebase.setOutdoor((String)ds.child("outdoor").getValue());
-                    petDiaryFirebase.setHealth((String)ds.child("health").getValue());
-                    diaryList.add(petDiaryFirebase);
+//                    petDiaryFirebase.setPetName((String) ds.child("petname").getValue());
+//                    petDiaryFirebase.setTime((String)ds.child("time").getValue());
+//                    petDiaryFirebase.setDate((String)ds.child("date").getValue());
+//                    petDiaryFirebase.setFoodIntake((String)ds.child("foodIntake").getValue());
+//                    petDiaryFirebase.setWaterIntake((String)ds.child("waterIntake").getValue());
+//                    petDiaryFirebase.setOutdoor((String)ds.child("outdoor").getValue());
+//                    petDiaryFirebase.setHealth((String)ds.child("health").getValue());
+//                    diaryList.add(petDiaryFirebase);
+
+                    diaryList.add(new PetDiaryFirebase(ds.child("petname").getValue().toString(),
+                            ds.child("time").getValue().toString(),
+                            ds.child("date").getValue().toString(),
+                            ds.child("foodIntake").getValue().toString(),
+                            ds.child("waterIntake").getValue().toString(),
+                            ds.child("outdoor").getValue().toString(),
+                            ds.child("health").getValue().toString(),
+                            ds.getKey()));
                 }
 
                 //setup adapter

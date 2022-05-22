@@ -117,12 +117,12 @@ public class ProfileFragment extends Fragment {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                reference.child(fAuth.getUid()).addValueEventListener(new ValueEventListener() {
+                reference.child(fAuth.getUid()).child("AddedPet").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         //check if pet profile child less than 2
                         long num = snapshot.getChildrenCount();
-                        if (num < 2){
+                        if ( num < 2){
                             Intent intent = new Intent(getActivity(),AddPetProfile.class);
                             startActivity(intent);
                         }
@@ -130,10 +130,6 @@ public class ProfileFragment extends Fragment {
                             //if pet profile child more than 2
                             Toast.makeText(getActivity(), "Only can add 2 pets", Toast.LENGTH_SHORT).show();
                         }
-//                        for (DataSnapshot ds : snapshot.getChildren()){
-
-
-//                        }
                     }
 
                     @Override
