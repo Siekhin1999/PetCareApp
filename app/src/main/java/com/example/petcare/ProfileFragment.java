@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.petcare.adapterPetDiary.PetDiaryAdapterFirebase;
@@ -116,8 +117,26 @@ public class ProfileFragment extends Fragment {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(),AddPetProfile.class);
-                startActivity(intent);
+                reference.child(fAuth.getUid()).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        //check if pet profile child more than 2
+                        long num = snapshot.getChildrenCount();
+                        if (num >= 2){
+                            Toast.makeText(getActivity(), "Only can add 2 pets", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            //if pet profile child less than 2
+                            Intent intent = new Intent(getActivity(),AddPetProfile.class);
+                            startActivity(intent);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
             }
         });
 
