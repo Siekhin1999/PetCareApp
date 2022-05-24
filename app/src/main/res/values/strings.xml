@@ -8,4 +8,22 @@
         <item>Male, Cat</item>
         <item>Female, Cat</item>
     </string-array>
+
+    <string-array name="vaccinetype">
+        <item>Bordetella bronchiseptica(kennel cough)</item>
+        <item>Borrelia burgdorferi</item>
+        <item>Canine Adenovirus Type 1(CAV-1)(Hepatitis)</item>
+        <item>Canine Adenovirus-2 (CAV-2)</item>
+        <item>Canine Distemper</item>
+        <item>Canine Leishmaniosis</item>
+        <item>Coronavirus</item>
+        <item>Leptospirosis canicola</item>
+        <item>Leptospirosis icterohaemorrhagiae</item>
+        <item>Lyme</item>
+        <item>Measles</item>
+        <item>Parainfluenza</item>
+        <item>Parvovirus</item>
+        <item>Rabies</item>
+    </string-array>
+
 </resources>

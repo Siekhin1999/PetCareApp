@@ -46,13 +46,16 @@ public class DiaryDetailActivity extends AppCompatActivity {
         et_update_health = findViewById(R.id.et_update_health);
         btn_update = findViewById(R.id.btn_update);
 
+//        Intent intent = getIntent();
+//        diaryId = intent.getStringExtra("diaryid");
+
         fAuth = FirebaseAuth.getInstance();
         fUser = fAuth.getCurrentUser();
 
         reference = FirebaseDatabase.getInstance().getReference("Diary").child(fAuth.getUid());
 
         //show diary detail
-        reference.addValueEventListener(new ValueEventListener() {
+/*        reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot ds : snapshot.getChildren()){
@@ -71,8 +74,8 @@ public class DiaryDetailActivity extends AppCompatActivity {
 
             }
         });
-
-/*        Intent intent = getIntent();
+*/
+        Intent intent = getIntent();
         diaryId = intent.getStringExtra("diaryid");
 
         petname = intent.getStringExtra("petname");
@@ -90,7 +93,7 @@ public class DiaryDetailActivity extends AppCompatActivity {
         et_update_waterintake.setText(water);
         et_update_outdoor.setText(outdoor);
         et_update_health.setText(health);
-*/
+
 
     }
 }

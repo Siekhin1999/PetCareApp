@@ -14,7 +14,7 @@
         <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/font/text_me_one.xml" value="0.234375" />
         <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/layout/activity_about_us.xml" value="0.1802536231884058" />
         <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/layout/activity_add_pet_profile.xml" value="0.2" />
-        <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/layout/activity_add_vacination.xml" value="0.17300724637681159" />
+        <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/layout/activity_add_vacination.xml" value="0.22" />
         <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/layout/activity_bottom_navigation.xml" value="0.17980072463768115" />
         <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/layout/activity_cat_tips_detail.xml" value="0.17844202898550723" />
         <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/layout/activity_cat_training_detail.xml" value="0.1852355072463768" />
@@ -50,6 +50,7 @@
         <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/layout/row_dog_tips.xml" value="0.17844202898550723" />
         <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/layout/row_dog_training.xml" value="0.17391304347826086" />
         <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/layout/row_petprofile.xml" value="0.18568840579710144" />
+        <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/layout/row_vaccine.xml" value="0.17798913043478262" />
         <entry key="..\:/Sem6/fyp - petcare app/app/src/main/res/menu/bottom_nav.xml" value="0.20416666666666666" />
         <entry key="..\:/Sem6/fyp/app/src/main/res/layout/activity_bottom_navigation.xml" value="0.18" />
         <entry key="..\:/Sem6/fyp/app/src/main/res/layout/activity_main.xml" value="0.19610507246376813" />

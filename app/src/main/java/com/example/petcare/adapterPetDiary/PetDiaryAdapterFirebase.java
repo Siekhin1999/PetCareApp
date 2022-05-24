@@ -147,14 +147,14 @@ public class PetDiaryAdapterFirebase extends RecyclerView.Adapter<PetDiaryAdapte
             Toast.makeText(view.getContext(), "Diary: " + diaryList.get(getAdapterPosition()).getPetName(),Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(view.getContext(), DiaryDetailActivity.class);
 
-//            intent.putExtra("petname", diaryList.get(getAdapterPosition()).getPetName());
-//            intent.putExtra("time", diaryList.get(getAdapterPosition()).getTime());
-//            intent.putExtra("date", diaryList.get(getAdapterPosition()).getDate());
-//            intent.putExtra("fooidIntake", diaryList.get(getAdapterPosition()).getFoodIntake());
-//            intent.putExtra("waterIntake", diaryList.get(getAdapterPosition()).getWaterIntake());
-//            intent.putExtra("outdoor", diaryList.get(getAdapterPosition()).getOutdoor());
-//            intent.putExtra("health", diaryList.get(getAdapterPosition()).getHealth());
-//            intent.putExtra("diaryid", diaryList.get(getAdapterPosition()).getDiaryId());
+            intent.putExtra("petname", diaryList.get(getAdapterPosition()).getPetName());
+            intent.putExtra("time", diaryList.get(getAdapterPosition()).getTime());
+            intent.putExtra("date", diaryList.get(getAdapterPosition()).getDate());
+            intent.putExtra("foodIntake", diaryList.get(getAdapterPosition()).getFoodIntake());
+            intent.putExtra("waterIntake", diaryList.get(getAdapterPosition()).getWaterIntake());
+            intent.putExtra("outdoor", diaryList.get(getAdapterPosition()).getOutdoor());
+            intent.putExtra("health", diaryList.get(getAdapterPosition()).getHealth());
+            intent.putExtra("diaryid", diaryList.get(getAdapterPosition()).getDiaryId());
             view.getContext().startActivity(intent);
 
         }
