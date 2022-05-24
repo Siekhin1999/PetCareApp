@@ -212,7 +212,8 @@
                     android:layout_height="wrap_content"
                     android:layout_toLeftOf="@id/imgdelete"
                     android:paddingRight="8dp"
-                    android:src="@drawable/ic_baseline_edit_24" />
+                    android:src="@drawable/ic_baseline_edit_24"
+                    android:visibility="gone" />
 
             </RelativeLayout>
 

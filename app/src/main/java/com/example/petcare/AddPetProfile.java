@@ -183,26 +183,28 @@ public class AddPetProfile extends AppCompatActivity {
             @Override
             public void onSuccess(Uri uri) {
                 hashMap.put("image",  uri.toString());
-                reference.child(fAuth.getUid()).child("AddedPet").child(newPetId).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()){
-                            et_apetName.getText().clear();
-                            et_apetage.getText().clear();
-                            //spn_addtype.getSelectedItem().toString();
 
-                            Toast.makeText(AddPetProfile.this, "New Pet Added!", Toast.LENGTH_SHORT).show();
-                            progressBar.setVisibility(View.GONE);
-                            finish();
-                        }
-                        else {
-                            Toast.makeText(AddPetProfile.this, "Failed Added", Toast.LENGTH_SHORT).show();
-                            progressBar.setVisibility(View.GONE);
-                        }
-                    }
-                });
             }
         });
+
+        reference.child(fAuth.getUid()).child("AddedPet").child(newPetId).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()){
+                    et_apetName.getText().clear();
+                    et_apetage.getText().clear();
+                    //spn_addtype.getSelectedItem().toString();
+
+                    Toast.makeText(AddPetProfile.this, "New Pet Added!", Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
+                }
+                else {
+                    Toast.makeText(AddPetProfile.this, "Failed Added", Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
+                }
+            }
+        });
+
 
 
     }

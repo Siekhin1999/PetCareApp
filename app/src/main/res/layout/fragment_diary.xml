@@ -18,11 +18,50 @@
         android:textSize="28sp"
         android:textStyle="bold" />
 
+    <LinearLayout
+        android:id="@+id/slide_bar_diary"
+        android:background="@drawable/shape_rect_1"
+        android:layout_below="@id/tv_petdiary"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <TextView
+            android:background="@drawable/shape_rect_2"
+            android:id="@+id/tv_tab_diary"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="@font/antic"
+            android:gravity="center"
+            android:text="Diary"
+            android:textAllCaps="true"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_tab_vaci"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="@font/antic"
+            android:gravity="center"
+            android:text="Vacination"
+            android:textAllCaps="true"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
     <RelativeLayout
         android:id="@+id/petDiaryView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/tv_petdiary">
+        android:layout_below="@id/slide_bar_diary">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/petDiaryRecycler"
@@ -45,6 +84,36 @@
             android:src="@drawable/ic_baseline_add_24"
             tools:ignore="SpeakableTextPresentCheck" />
 
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/petVaciView"
+        android:layout_below="@id/slide_bar_diary"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/petVaciRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        //tools:listitem="@layout/activity_row_petcaretips" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fbtn_addvaci"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@id/petVaciRecycler"
+            android:layout_alignBottom="@id/petVaciRecycler"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="20dp"
+            android:clickable="true"
+            app:backgroundTint="#FA7A47"
+            app:tint="@color/colorWhite"
+            android:src="@drawable/ic_baseline_add_24"
+            tools:ignore="SpeakableTextPresentCheck" />
     </RelativeLayout>
 
 

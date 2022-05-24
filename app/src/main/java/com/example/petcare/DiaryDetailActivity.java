@@ -1,5 +1,6 @@
 package com.example.petcare;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -10,8 +11,13 @@ import android.widget.EditText;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class DiaryDetailActivity extends AppCompatActivity {
 
@@ -24,6 +30,7 @@ public class DiaryDetailActivity extends AppCompatActivity {
     FirebaseDatabase database;
     private Context context;
     DatabaseReference reference;
+    ArrayList<PetDiaryFirebase> diaryList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +48,31 @@ public class DiaryDetailActivity extends AppCompatActivity {
 
         fAuth = FirebaseAuth.getInstance();
         fUser = fAuth.getCurrentUser();
+
         reference = FirebaseDatabase.getInstance().getReference("Diary").child(fAuth.getUid());
 
-        Intent intent = getIntent();
+        //show diary detail
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot ds : snapshot.getChildren()){
+                    et_update_petname.setText((CharSequence) ds.child("petname").getValue());
+                    et_update_date.setText((CharSequence) ds.child("date").getValue());
+                    et_update_time.setText((CharSequence) ds.child("time").getValue());
+                    et_update_foodintake.setText((CharSequence) ds.child("foodIntake").getValue());
+                    et_update_waterintake.setText((CharSequence) ds.child("waterIntake").getValue());
+                    et_update_outdoor.setText((CharSequence) ds.child("outdoor").getValue());
+                    et_update_health.setText((CharSequence) ds.child("health").getValue());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+/*        Intent intent = getIntent();
         diaryId = intent.getStringExtra("diaryid");
 
         petname = intent.getStringExtra("petname");
@@ -61,7 +90,7 @@ public class DiaryDetailActivity extends AppCompatActivity {
         et_update_waterintake.setText(water);
         et_update_outdoor.setText(outdoor);
         et_update_health.setText(health);
-
+*/
 
     }
 }

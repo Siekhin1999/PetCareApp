@@ -152,6 +152,9 @@ public class ProfileFragment extends Fragment {
         mref.child(fAuth.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (getActivity() == null) {
+                    return;
+                }
                 tvpetname.setText(dataSnapshot.child("petname").getValue().toString());
                 String image = (String) dataSnapshot.child("image").getValue();
                 Glide.with(getActivity()).load(image).into(img3);

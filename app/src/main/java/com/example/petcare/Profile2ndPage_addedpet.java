@@ -73,15 +73,16 @@ public class Profile2ndPage_addedpet extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 //successfully
-                tvaddpetname.setText("Pet Name: " + dataSnapshot.child("newPetname").getValue());
-                tvaddpetage.setText("Pet Age: " + dataSnapshot.child("newPetage").getValue());
-                tvaddgender.setText("Gender: " + dataSnapshot.child("newPetType").getValue());
+                for (DataSnapshot ds : dataSnapshot.getChildren()){
+                    tvaddpetname.setText("Pet Name: " + ds.child("newPetname").getValue());
+                    tvaddpetage.setText("Pet Age: " + ds.child("newPetage").getValue());
+                    tvaddgender.setText("Gender: " + ds.child("newPetType").getValue());
 //                tvusername.setText("Pet Owner: " + dataSnapshot.child("name").getValue());
 //                tvemail.setText("Email: " + dataSnapshot.child("email").getValue());
 //                    imageView.setImageURI((Uri) dataSnapshot.child("image").getValue());
-                String image = (String) dataSnapshot.child("image").getValue();
-                Glide.with(Profile2ndPage_addedpet.this).load(image).into(imageView);
-
+                    String image = (String) ds.child("image").getValue();
+                    Glide.with(Profile2ndPage_addedpet.this).load(image).into(imageView);
+                }
             }
 
             @Override

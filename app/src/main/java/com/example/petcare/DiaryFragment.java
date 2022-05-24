@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.petcare.adapterDogTips.DogTipsAdapterFirebase;
 import com.example.petcare.adapterPetDiary.PetDiaryAdapterFirebase;
+import com.example.petcare.adapterPetVacination.PetVacinationAdapterFirebase;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -77,10 +78,12 @@ public class DiaryFragment extends Fragment {
     DatabaseReference reference;
     FirebaseAuth fAuth;
     FirebaseUser fUser;
-    RecyclerView petDiaryRecycler;
+    RecyclerView petDiaryRecycler, petVaciRecycler;
     PetDiaryFirebase petDiaryFirebase;
     ArrayList<PetDiaryFirebase> diaryList;
+    ArrayList<PetVacinationFirebase> vacinationList;
     PetDiaryAdapterFirebase petDiaryAdapterFirebase;
+    PetVacinationAdapterFirebase petVacinationAdapterFirebase;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -88,10 +91,15 @@ public class DiaryFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_diary, container, false);
 
+        TextView tv_tab_diary = (TextView)view.findViewById(R.id.tv_tab_diary);
+        TextView tv_tab_vaci = (TextView)view.findViewById(R.id.tv_tab_vaci);
         TextView tv_title = (TextView)view.findViewById(R.id.tv_petdiary);
         FloatingActionButton floatingActionButton = view.findViewById(R.id.fbtn_adddiary);
+        FloatingActionButton fbtn_addvacci = view.findViewById(R.id.fbtn_addvaci);
         RelativeLayout petDiaryView = (RelativeLayout)view.findViewById(R.id.petDiaryView);
+        RelativeLayout petVaciView = (RelativeLayout)view.findViewById(R.id.petVaciView);
         petDiaryRecycler = (RecyclerView)view.findViewById(R.id.petDiaryRecycler);
+        petVaciRecycler = (RecyclerView)view.findViewById(R.id.petVaciRecycler);
 
         fAuth = FirebaseAuth.getInstance();
         fUser = fAuth.getCurrentUser();
@@ -101,6 +109,32 @@ public class DiaryFragment extends Fragment {
         diaryList = new ArrayList<>();
         GetDiaryDataFromFirebase();
 
+        //for pet vaccine recyclerview
+        vacinationList = new ArrayList<>();
+        GetVaciDataFromFirebase();
+
+        tv_tab_diary.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                petDiaryView.setVisibility(View.VISIBLE);
+                petVaciView.setVisibility(View.GONE);
+
+                tv_tab_diary.setBackgroundResource(R.drawable.shape_rect_2);
+                tv_tab_vaci.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+            }
+        });
+
+        tv_tab_vaci.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                petVaciView.setVisibility(View.VISIBLE);
+                petDiaryView.setVisibility(View.GONE);
+
+                tv_tab_vaci.setBackgroundResource(R.drawable.shape_rect_2);
+                tv_tab_diary.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+            }
+        });
+
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,8 +143,17 @@ public class DiaryFragment extends Fragment {
             }
         });
 
+        fbtn_addvacci.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(),DiaryAddVaccinePage.class);
+                startActivity(intent);
+            }
+        });
+
         return view;
     }
+
 
     //retrieve diary data from database
     private void GetDiaryDataFromFirebase() {
@@ -121,19 +164,6 @@ public class DiaryFragment extends Fragment {
                 diaryList.clear();
 
                 for (DataSnapshot ds : dataSnapshot.getChildren()){
-//                    petDiaryFirebase = ds.getValue(PetDiaryFirebase.class);
-//                    diaryList.add(petDiaryFirebase);
-
-//                    PetDiaryFirebase petDiaryFirebase = new PetDiaryFirebase();
-
-//                    petDiaryFirebase.setPetName((String) ds.child("petname").getValue());
-//                    petDiaryFirebase.setTime((String)ds.child("time").getValue());
-//                    petDiaryFirebase.setDate((String)ds.child("date").getValue());
-//                    petDiaryFirebase.setFoodIntake((String)ds.child("foodIntake").getValue());
-//                    petDiaryFirebase.setWaterIntake((String)ds.child("waterIntake").getValue());
-//                    petDiaryFirebase.setOutdoor((String)ds.child("outdoor").getValue());
-//                    petDiaryFirebase.setHealth((String)ds.child("health").getValue());
-//                    diaryList.add(petDiaryFirebase);
 
                     diaryList.add(new PetDiaryFirebase(ds.child("petname").getValue().toString(),
                             ds.child("time").getValue().toString(),
@@ -156,5 +186,9 @@ public class DiaryFragment extends Fragment {
 
             }
         });
+    }
+
+    //retrieve vaccine data from database
+    private void GetVaciDataFromFirebase() {
     }
 }
