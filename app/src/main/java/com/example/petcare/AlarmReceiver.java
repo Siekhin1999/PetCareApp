@@ -26,7 +26,9 @@ public class AlarmReceiver extends BroadcastReceiver {
                 .setContentText(message)
                 .setWhen(System.currentTimeMillis())
                 .setAutoCancel(true)
-                .setContentIntent(contentIntent);
+                .setContentIntent(contentIntent)
+                .setPriority(Notification.PRIORITY_MAX)
+                .setDefaults(Notification.DEFAULT_ALL);
 
         notificationManager.notify(notificationId, builder.build());
 

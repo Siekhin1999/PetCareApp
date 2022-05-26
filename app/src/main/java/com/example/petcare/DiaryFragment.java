@@ -84,13 +84,13 @@ public class DiaryFragment extends Fragment {
         }
     }
 
-    DatabaseReference reference;
+    DatabaseReference reference, reference2;
     FirebaseAuth fAuth;
     FirebaseUser fUser;
     RecyclerView petDiaryRecycler, petVaciRecycler;
     PetDiaryFirebase petDiaryFirebase;
     ArrayList<PetDiaryFirebase> diaryList;
-    ArrayList<PetVacinationFirebase> vacinationList;
+    ArrayList<PetVaccineFirebase> vaccineList;
     PetDiaryAdapterFirebase petDiaryAdapterFirebase;
     PetVacinationAdapterFirebase petVacinationAdapterFirebase;
     private int notificationId = 1;
@@ -112,18 +112,21 @@ public class DiaryFragment extends Fragment {
         RelativeLayout petRemindView = (RelativeLayout)view.findViewById(R.id.petRemindView);
         petDiaryRecycler = (RecyclerView)view.findViewById(R.id.petDiaryRecycler);
         petVaciRecycler = (RecyclerView)view.findViewById(R.id.petVaciRecycler);
+        EditText editText = view.findViewById(R.id.et_task);
+        TimePicker timePicker = view.findViewById(R.id.tp_settime);
         Button btn_set = (Button) view.findViewById(R.id.btn_set);
 
         fAuth = FirebaseAuth.getInstance();
         fUser = fAuth.getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference("Diary").child(fAuth.getUid());
+        reference2 = FirebaseDatabase.getInstance().getReference("Vaccine").child(fAuth.getUid());
 
         //for pet diary recyclerview
         diaryList = new ArrayList<>();
         GetDiaryDataFromFirebase();
 
         //for pet vaccine recyclerview
-        vacinationList = new ArrayList<>();
+        vaccineList = new ArrayList<>();
         GetVaciDataFromFirebase();
 
         tv_tab_diary.setOnClickListener(new View.OnClickListener() {
@@ -184,13 +187,13 @@ public class DiaryFragment extends Fragment {
         btn_set.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText editText = view.findViewById(R.id.et_task);
-                String task = editText.getText().toString();
-                TimePicker timePicker = view.findViewById(R.id.tp_settime);
+                //EditText editText = view.findViewById(R.id.et_task);
+                //String task = editText.getText().toString();
+                //TimePicker timePicker = view.findViewById(R.id.tp_settime);
 
                 Intent intent = new Intent(getActivity(), AlarmReceiver.class);
                 intent.putExtra("notificationId", notificationId);
-                intent.putExtra("todo", task);
+                intent.putExtra("todo", editText.getText().toString());
 
                 PendingIntent alarmIntent = PendingIntent.getBroadcast(getActivity(),0,
                         intent, PendingIntent.FLAG_CANCEL_CURRENT);
@@ -206,14 +209,13 @@ public class DiaryFragment extends Fragment {
                 long alarmStartTime = startTime.getTimeInMillis();
 
                 alarm.set(AlarmManager.RTC_WAKEUP, alarmStartTime, alarmIntent);
+                editText.getText().clear();
                 Toast.makeText(getActivity(), "Done!", Toast.LENGTH_SHORT).show();
             }
         });
 
         return view;
     }
-
-
 
     //retrieve diary data from database
     private void GetDiaryDataFromFirebase() {
@@ -250,6 +252,34 @@ public class DiaryFragment extends Fragment {
 
     //retrieve vaccine data from database
     private void GetVaciDataFromFirebase() {
+        reference2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //clear list at start
+                vaccineList.clear();
+
+                for (DataSnapshot ds : snapshot.getChildren()){
+
+                    vaccineList.add(new PetVaccineFirebase(ds.child("petname").getValue().toString(),
+                            ds.child("time").getValue().toString(),
+                            ds.child("date").getValue().toString(),
+                            ds.child("vaccineIntake").getValue().toString(),
+                            ds.child("cared").getValue().toString(),
+                            ds.child("notes").getValue().toString(),
+                            ds.getKey()));
+                }
+
+                //setup adapter
+                petVacinationAdapterFirebase = new PetVacinationAdapterFirebase(getActivity(),vaccineList);
+                //set adapter to recyclerview
+                petVaciRecycler.setAdapter(petVacinationAdapterFirebase);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     //for reminder
