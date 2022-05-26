@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PetCare"
         android:usesCleartextTraffic="true" >
+
+        <receiver
+            android:name=".AlarmReceiver"
+            android:enabled="true"
+            android:exported="true"/>
+
         <activity
             android:name=".DiaryAddVaccinePage"
             android:exported="false" />

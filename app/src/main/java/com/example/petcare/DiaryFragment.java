@@ -1,5 +1,9 @@
 package com.example.petcare;
 
+import static android.content.Context.ALARM_SERVICE;
+
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -10,8 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.example.petcare.adapterDogTips.DogTipsAdapterFirebase;
 import com.example.petcare.adapterPetDiary.PetDiaryAdapterFirebase;
@@ -27,6 +35,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -84,22 +93,26 @@ public class DiaryFragment extends Fragment {
     ArrayList<PetVacinationFirebase> vacinationList;
     PetDiaryAdapterFirebase petDiaryAdapterFirebase;
     PetVacinationAdapterFirebase petVacinationAdapterFirebase;
+    private int notificationId = 1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState)  {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_diary, container, false);
 
         TextView tv_tab_diary = (TextView)view.findViewById(R.id.tv_tab_diary);
         TextView tv_tab_vaci = (TextView)view.findViewById(R.id.tv_tab_vaci);
+        TextView tv_tab_remind = (TextView)view.findViewById(R.id.tv_tab_reminder);
         TextView tv_title = (TextView)view.findViewById(R.id.tv_petdiary);
         FloatingActionButton floatingActionButton = view.findViewById(R.id.fbtn_adddiary);
         FloatingActionButton fbtn_addvacci = view.findViewById(R.id.fbtn_addvaci);
         RelativeLayout petDiaryView = (RelativeLayout)view.findViewById(R.id.petDiaryView);
         RelativeLayout petVaciView = (RelativeLayout)view.findViewById(R.id.petVaciView);
+        RelativeLayout petRemindView = (RelativeLayout)view.findViewById(R.id.petRemindView);
         petDiaryRecycler = (RecyclerView)view.findViewById(R.id.petDiaryRecycler);
         petVaciRecycler = (RecyclerView)view.findViewById(R.id.petVaciRecycler);
+        Button btn_set = (Button) view.findViewById(R.id.btn_set);
 
         fAuth = FirebaseAuth.getInstance();
         fUser = fAuth.getCurrentUser();
@@ -118,9 +131,11 @@ public class DiaryFragment extends Fragment {
             public void onClick(View view) {
                 petDiaryView.setVisibility(View.VISIBLE);
                 petVaciView.setVisibility(View.GONE);
+                petRemindView.setVisibility(View.GONE);
 
                 tv_tab_diary.setBackgroundResource(R.drawable.shape_rect_2);
                 tv_tab_vaci.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                tv_tab_remind.setBackgroundColor(getResources().getColor(android.R.color.transparent));
             }
         });
 
@@ -129,9 +144,24 @@ public class DiaryFragment extends Fragment {
             public void onClick(View view) {
                 petVaciView.setVisibility(View.VISIBLE);
                 petDiaryView.setVisibility(View.GONE);
+                petRemindView.setVisibility(View.GONE);
 
                 tv_tab_vaci.setBackgroundResource(R.drawable.shape_rect_2);
                 tv_tab_diary.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                tv_tab_remind.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+            }
+        });
+
+        tv_tab_remind.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                petRemindView.setVisibility(View.VISIBLE);
+                petDiaryView.setVisibility(View.GONE);
+                petVaciView.setVisibility(View.GONE);
+
+                tv_tab_remind.setBackgroundResource(R.drawable.shape_rect_2);
+                tv_tab_diary.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                tv_tab_vaci.setBackgroundColor(getResources().getColor(android.R.color.transparent));
             }
         });
 
@@ -151,8 +181,38 @@ public class DiaryFragment extends Fragment {
             }
         });
 
+        btn_set.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EditText editText = view.findViewById(R.id.et_task);
+                String task = editText.getText().toString();
+                TimePicker timePicker = view.findViewById(R.id.tp_settime);
+
+                Intent intent = new Intent(getActivity(), AlarmReceiver.class);
+                intent.putExtra("notificationId", notificationId);
+                intent.putExtra("todo", task);
+
+                PendingIntent alarmIntent = PendingIntent.getBroadcast(getActivity(),0,
+                        intent, PendingIntent.FLAG_CANCEL_CURRENT);
+
+                AlarmManager alarm = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
+                int hour = timePicker.getCurrentHour();
+                int minute = timePicker.getCurrentMinute();
+
+                Calendar startTime = Calendar.getInstance();
+                startTime.set(Calendar.HOUR_OF_DAY, hour);
+                startTime.set(Calendar.MINUTE, minute);
+                startTime.set(Calendar.SECOND, 0);
+                long alarmStartTime = startTime.getTimeInMillis();
+
+                alarm.set(AlarmManager.RTC_WAKEUP, alarmStartTime, alarmIntent);
+                Toast.makeText(getActivity(), "Done!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         return view;
     }
+
 
 
     //retrieve diary data from database
@@ -190,5 +250,11 @@ public class DiaryFragment extends Fragment {
 
     //retrieve vaccine data from database
     private void GetVaciDataFromFirebase() {
+    }
+
+    //for reminder
+    private void setAlarm() {
+
+
     }
 }

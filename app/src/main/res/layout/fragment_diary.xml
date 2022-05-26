@@ -55,6 +55,19 @@
             android:textSize="16sp"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/tv_tab_reminder"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="@font/antic"
+            android:gravity="center"
+            android:text="Reminder"
+            android:textAllCaps="true"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
     </LinearLayout>
 
     <RelativeLayout
@@ -76,12 +89,12 @@
             android:layout_height="wrap_content"
             android:layout_alignRight="@id/petDiaryRecycler"
             android:layout_alignBottom="@id/petDiaryRecycler"
-            android:layout_marginBottom="20dp"
             android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
             android:clickable="true"
+            android:src="@drawable/ic_baseline_add_24"
             app:backgroundTint="#FA7A47"
             app:tint="@color/colorWhite"
-            android:src="@drawable/ic_baseline_add_24"
             tools:ignore="SpeakableTextPresentCheck" />
 
     </RelativeLayout>
@@ -114,6 +127,60 @@
             app:tint="@color/colorWhite"
             android:src="@drawable/ic_baseline_add_24"
             tools:ignore="SpeakableTextPresentCheck" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/petRemindView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/slide_bar_diary"
+        android:visibility="gone">
+
+        <EditText
+            android:id="@+id/et_task"
+            android:layout_width="320dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/petRemindView"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="16dp"
+            android:layout_toLeftOf="@id/petRemindView"
+            android:background="@drawable/round_textfields"
+            android:drawableLeft="@drawable/task_24px"
+            android:ems="10"
+            android:fontFamily="@font/assistant"
+            android:hint="Your Task"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.538"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="NotSibling" />
+
+        <TimePicker
+            android:id="@+id/tp_settime"
+            android:layout_width="300dp"
+            android:layout_height="342dp"
+            android:layout_below="@id/et_task"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="16dp" />
+
+        <Button
+            android:id="@+id/btn_set"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tp_settime"
+            android:layout_marginLeft="150dp"
+            android:layout_marginTop="45dp"
+            android:background="@drawable/round_buttons"
+            android:fontFamily="@font/text_me_one"
+            android:text="Set"
+            android:textAllCaps="true"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.507"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
     </RelativeLayout>
 
 

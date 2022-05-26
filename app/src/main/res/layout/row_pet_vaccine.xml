@@ -71,17 +71,17 @@
                 android:id="@+id/imageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/tv_food_intake"
-                android:layout_alignBottom="@+id/tv_food_intake"
+                android:layout_alignTop="@+id/tv_vaccine_take"
+                android:layout_alignBottom="@+id/tv_vaccine_take"
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="2dp"
                 android:layout_marginBottom="2dp"
-                android:layout_toStartOf="@+id/tv_food_intake"
-                app:srcCompat="@drawable/dog_bowl_24px" />
+                android:layout_toStartOf="@+id/tv_vaccine_take"
+                app:srcCompat="@drawable/syringe_24px" />
 
             <TextView
-                android:id="@+id/tv_food_intake"
+                android:id="@+id/tv_vaccine_take"
                 android:layout_width="270dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_dPetname"
@@ -101,27 +101,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/imageView"
-                android:layout_alignTop="@+id/tv_water_intake"
-                android:layout_alignBottom="@+id/tv_water_intake"
+                android:layout_alignTop="@+id/tv_cared_by"
+                android:layout_alignBottom="@+id/tv_cared_by"
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="2dp"
                 android:layout_marginBottom="0dp"
-                android:layout_toStartOf="@+id/tv_water_intake"
-                app:srcCompat="@drawable/water_24px" />
+                android:layout_toStartOf="@+id/tv_cared_by"
+                app:srcCompat="@drawable/country_house_24px" />
 
             <TextView
-                android:id="@+id/tv_water_intake"
+                android:id="@+id/tv_cared_by"
                 android:layout_width="270dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_food_intake"
-                android:layout_alignEnd="@+id/tv_food_intake"
+                android:layout_below="@+id/tv_vaccine_take"
+                android:layout_alignEnd="@+id/tv_vaccine_take"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="0dp"
                 android:layout_marginBottom="16dp"
-                android:text="1000ml"
+                android:text="At Home"
                 android:textAlignment="viewStart"
                 android:textColor="#722F37"
                 android:textSize="18sp" />
@@ -145,8 +145,8 @@
                 android:id="@+id/tv_outdoor_note"
                 android:layout_width="270dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_water_intake"
-                android:layout_alignEnd="@+id/tv_water_intake"
+                android:layout_below="@+id/tv_cared_by"
+                android:layout_alignEnd="@+id/tv_cared_by"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="2dp"
@@ -187,7 +187,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tv_water_intake">
+                android:layout_below="@id/tv_cared_by">
 
                 <TextView
                     android:id="@+id/tvdate"
