@@ -31,7 +31,7 @@ public class PetVacinationAdapterFirebase extends RecyclerView.Adapter<PetVacina
     private static final String Tag = "RecyclerView";
     private Context mContext;
     private ArrayList<PetVaccineFirebase> vaccineList;
-    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Diary");
+    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Vaccine");
     FirebaseAuth fAuth = FirebaseAuth.getInstance();
     FirebaseUser fUser = fAuth.getCurrentUser();
 
@@ -56,10 +56,10 @@ public class PetVacinationAdapterFirebase extends RecyclerView.Adapter<PetVacina
         //get data
         PetVaccineFirebase petVaccineFirebase = vaccineList.get(position);
         final String petName = petVaccineFirebase.getPetName();
-        final String time = petVaccineFirebase.getTime();
+        //final String time = petVaccineFirebase.getTime();
         final String date = petVaccineFirebase.getDate();
         final String vaccineIntake = petVaccineFirebase.getVaccineIntake();
-        final String notes = petVaccineFirebase.getNote();
+        //final String notes = petVaccineFirebase.getNote();
         final String cared = petVaccineFirebase.getCared();
         final String vaccineId = petVaccineFirebase.getVaccineId();
 
@@ -136,8 +136,8 @@ public class PetVacinationAdapterFirebase extends RecyclerView.Adapter<PetVacina
             intent.putExtra("petname", vaccineList.get(getAdapterPosition()).getPetName());
             intent.putExtra("time", vaccineList.get(getAdapterPosition()).getTime());
             intent.putExtra("date", vaccineList.get(getAdapterPosition()).getDate());
-            intent.putExtra("cared", vaccineList.get(getAdapterPosition()).getCared());
             intent.putExtra("vaccineIntake", vaccineList.get(getAdapterPosition()).getVaccineIntake());
+            intent.putExtra("cared", vaccineList.get(getAdapterPosition()).getCared());
             intent.putExtra("note", vaccineList.get(getAdapterPosition()).getNote());
             intent.putExtra("vaccineid", vaccineList.get(getAdapterPosition()).getVaccineId());
             view.getContext().startActivity(intent);

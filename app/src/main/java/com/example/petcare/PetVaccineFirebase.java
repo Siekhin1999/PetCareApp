@@ -4,22 +4,22 @@ public class PetVaccineFirebase {
     String PetName;
     String Time;
     String Date;
-    String Note;
     String VaccineIntake;
     String Cared;
+    String Note;
     String VaccineId;
 
     PetVaccineFirebase(){
 
     }
 
-    public PetVaccineFirebase(String petName, String time, String date, String note, String vaccineIntake, String cared, String vaccineId) {
+    public PetVaccineFirebase(String petName, String time, String date, String vaccineIntake, String cared, String note, String vaccineId) {
         PetName = petName;
         Time = time;
         Date = date;
-        Note = note;
         VaccineIntake = vaccineIntake;
         Cared = cared;
+        Note = note;
         VaccineId = vaccineId;
     }
 
@@ -47,14 +47,6 @@ public class PetVaccineFirebase {
         Date = date;
     }
 
-    public String getNote() {
-        return Note;
-    }
-
-    public void setNote(String note) {
-        Note = note;
-    }
-
     public String getVaccineIntake() {
         return VaccineIntake;
     }
@@ -69,6 +61,14 @@ public class PetVaccineFirebase {
 
     public void setCared(String cared) {
         Cared = cared;
+    }
+
+    public String getNote() {
+        return Note;
+    }
+
+    public void setNote(String note) {
+        Note = note;
     }
 
     public String getVaccineId() {

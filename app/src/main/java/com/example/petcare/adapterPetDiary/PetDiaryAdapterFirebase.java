@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,8 +26,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.orhanobut.dialogplus.DialogPlus;
+import com.orhanobut.dialogplus.ViewHolder;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class PetDiaryAdapterFirebase extends RecyclerView.Adapter<PetDiaryAdapterFirebase.ViewHolder> {
     private static final String Tag = "RecyclerView";
@@ -105,6 +110,65 @@ public class PetDiaryAdapterFirebase extends RecyclerView.Adapter<PetDiaryAdapte
 
                 alertDialog.show();
 
+            }
+        });
+
+        holder.imgUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final DialogPlus dialogPlus = DialogPlus.newDialog(holder.tv_dPetname.getContext())
+                        .setContentHolder(new com.orhanobut.dialogplus.ViewHolder(R.layout.diary_update_popup))
+                        .setExpanded(true,1700)
+                        .create();
+
+                View view1 = dialogPlus.getHolderView();
+                EditText petname = view1.findViewById(R.id.txtpetname);
+                EditText date = view1.findViewById(R.id.txtdate);
+                EditText time = view1.findViewById(R.id.txttime);
+                EditText foodIntake = view1.findViewById(R.id.txtfoodintake);
+                EditText waterIntake = view1.findViewById(R.id.txtwaterintake);
+                EditText outdoor = view1.findViewById(R.id.txtoutdoor);
+                EditText health = view1.findViewById(R.id.txthealth);
+                Button btnupdate = view1.findViewById(R.id.btn_dupdate);
+
+                petname.setText(petDiaryFirebase.getPetName());
+                date.setText(petDiaryFirebase.getDate());
+                time.setText(petDiaryFirebase.getTime());
+                foodIntake.setText(petDiaryFirebase.getFoodIntake());
+                waterIntake.setText(petDiaryFirebase.getWaterIntake());
+                outdoor.setText(petDiaryFirebase.getOutdoor());
+                health.setText(petDiaryFirebase.getHealth());
+
+                dialogPlus.show();
+
+                btnupdate.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        HashMap<String, Object> hashMap = new HashMap<>();
+                        //hashMap.put("diaryid", diaryId);
+                        hashMap.put("petname", petname.getText().toString());
+                        hashMap.put("time", time.getText().toString());
+                        hashMap.put("date", date.getText().toString());
+                        hashMap.put("foodIntake", foodIntake.getText().toString());
+                        hashMap.put("waterIntake", waterIntake.getText().toString());
+                        hashMap.put("outdoor", outdoor.getText().toString());
+                        hashMap.put("health", health.getText().toString());
+
+                        reference.child(fAuth.getCurrentUser().getUid()).child(diaryList.get(position).getDiaryId()).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(mContext, "Diary Updated", Toast.LENGTH_SHORT).show();
+                                dialogPlus.dismiss();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(mContext, "Failed to update diary", Toast.LENGTH_SHORT).show();
+                                dialogPlus.dismiss();
+                            }
+                        });
+                    }
+                });
             }
         });
 

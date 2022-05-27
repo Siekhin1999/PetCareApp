@@ -36,8 +36,8 @@ public class VaccineDetailActivity extends AppCompatActivity {
         et_vpetname = findViewById(R.id.et_vpetName);
         et_vdate = findViewById(R.id.et_vdate);
         et_vtime = findViewById(R.id.et_vtime);
-        et_cared = findViewById(R.id.et_cared);
         et_vaccineintake = findViewById(R.id.et_vaccine);
+        et_cared = findViewById(R.id.et_cared);
         et_vnote = findViewById(R.id.et_vnotes);
 
         fAuth = FirebaseAuth.getInstance();
@@ -58,8 +58,8 @@ public class VaccineDetailActivity extends AppCompatActivity {
         et_vpetname.setText(petname);
         et_vdate.setText(date);
         et_vtime.setText(time);
-        et_cared.setText(cared);
         et_vaccineintake.setText(vaccineIntake);
+        et_cared.setText(cared);
         et_vnote.setText(note);
 
     }

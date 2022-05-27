@@ -49,6 +49,7 @@ dependencies {
     implementation 'com.google.android.exoplayer:exoplayer-hls:2.10.8'
     implementation 'com.google.android.exoplayer:exoplayer-smoothstreaming:2.10.8'
     implementation 'com.google.android.exoplayer:exoplayer-ui:2.10.8'
+    implementation 'com.orhanobut:dialogplus:1.11@aar'
 
     implementation 'com.google.firebase:firebase-storage:19.2.2'
 //    implementation 'com.firebaseui:firebase-ui-database:6.2.2'
