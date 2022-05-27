@@ -50,9 +50,9 @@ public class DiaryAddVaccinePage extends AppCompatActivity {
         setContentView(R.layout.activity_add_vacination);
 
         btnSave = findViewById(R.id.btn_save);
-        etPetName = findViewById(R.id.et_petName);
-        etTime = findViewById(R.id.et_time);
-        etDate = findViewById(R.id.et_date);
+        etPetName = findViewById(R.id.etvpetName);
+        etTime = findViewById(R.id.etvtime);
+        etDate = findViewById(R.id.etvdate);
         spn_vaccine = findViewById(R.id.spn_vaccinetype);
         radioGroup = findViewById(R.id.radioGroup);
         etNote = findViewById(R.id.et_notes);
@@ -140,30 +140,30 @@ public class DiaryAddVaccinePage extends AppCompatActivity {
 
     private void PerforAuth() {
         String uid = fAuth.getUid();
-        String petName = etPetName.getText().toString();
-        String time = etTime.getText().toString();
-        String date = etDate.getText().toString();
-        String notes = etNote.getText().toString();
+        String vpetName = etPetName.getText().toString();
+        String vtime = etTime.getText().toString();
+        String vdate = etDate.getText().toString();
+        String vnotes = etNote.getText().toString();
         String vaccineIntake = spn_vaccine.getSelectedItem().toString();
         int radioId = radioGroup.getCheckedRadioButtonId();
         radioButton = findViewById(radioId);
         String cared = radioButton.getText().toString();
 
-        if(petName.isEmpty()){
+        if(vpetName.isEmpty()){
             etPetName.setError("Pet Name is required!");
             etPetName.requestFocus();
         }
 
-        else if(time.isEmpty()){
+        else if(vtime.isEmpty()){
             etTime.setError("Time is required!");
             etTime.requestFocus();
         }
 
-        else if(date.isEmpty()){
+        else if(vdate.isEmpty()){
             etDate.setError("Date is required!");
             etDate.requestFocus();
         }
-        else if(notes.isEmpty()){
+        else if(vnotes.isEmpty()){
             etNote.setError("Notes is required!");
             etNote.requestFocus();
         }
@@ -179,23 +179,23 @@ public class DiaryAddVaccinePage extends AppCompatActivity {
 
         String vaccineId = reference.push().getKey();
         String uid = fAuth.getUid();
-        String petName = etPetName.getText().toString();
-        String time = etTime.getText().toString();
-        String date = etDate.getText().toString();
-        String notes = etNote.getText().toString();
+        String vpetName = etPetName.getText().toString();
+        String vtime = etTime.getText().toString();
+        String vdate = etDate.getText().toString();
+        String vnotes = etNote.getText().toString();
         String vaccineIntake = spn_vaccine.getSelectedItem().toString();
         int radioId = radioGroup.getCheckedRadioButtonId();
         radioButton = findViewById(radioId);
         String cared = radioButton.getText().toString();
 
         HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("diaryid", vaccineId);
-        hashMap.put("petname", petName);
-        hashMap.put("time", time);
-        hashMap.put("date", date);
-        hashMap.put("notes", notes);
+        hashMap.put("vaccineid", vaccineId);
+        hashMap.put("petname", vpetName);
+        hashMap.put("time", vtime);
+        hashMap.put("date", vdate);
         hashMap.put("vaccineIntake", vaccineIntake);
         hashMap.put("cared", cared);
+        hashMap.put("notes", vnotes);
 
         reference.child(uid).child(vaccineId).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
@@ -206,7 +206,7 @@ public class DiaryAddVaccinePage extends AppCompatActivity {
                     etDate.getText().clear();
                     etNote.getText().clear();
 
-                    Toast.makeText(DiaryAddVaccinePage.this, "Diary Saved!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DiaryAddVaccinePage.this, "Vaccination Saved!", Toast.LENGTH_SHORT).show();
                     progressBar.setVisibility(View.GONE);
                 }
                 else{

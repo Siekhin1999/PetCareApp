@@ -1,6 +1,8 @@
 package com.example.petcare.adapterPetVacination;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.petcare.PetVaccineFirebase;
 import com.example.petcare.R;
 import com.example.petcare.VaccineDetailActivity;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -60,10 +64,44 @@ public class PetVacinationAdapterFirebase extends RecyclerView.Adapter<PetVacina
         final String vaccineId = petVaccineFirebase.getVaccineId();
 
         //set data
-        holder.tv_dPetname.setText(petName);
+        holder.tv_vPetname.setText(petName);
         holder.tv_vaccineintake.setText(vaccineIntake);
         holder.tv_caredby.setText(cared);
         holder.tv_date.setText(date);
+
+        holder.imgvDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(holder.tv_vPetname.getContext());
+                alertDialog.setTitle("Delete Diary");
+                alertDialog.setMessage("Are you sure want to delete?");
+                alertDialog.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        reference.child(fAuth.getCurrentUser().getUid()).child(vaccineList.get(position).getVaccineId()).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(mContext, "Vaccination Deleted", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(mContext, "Failed to delete vaccination", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
+
+                alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(holder.tv_vPetname.getContext(),"Canceled",Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                alertDialog.show();
+            }
+        });
 
     }
 
@@ -73,20 +111,19 @@ public class PetVacinationAdapterFirebase extends RecyclerView.Adapter<PetVacina
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        TextView tv_dPetname, tv_vaccineintake, tv_caredby, tv_date;
-        ImageView imgDelete, imgUpdate;
+        TextView tv_vPetname, tv_vaccineintake, tv_caredby, tv_date;
+        ImageView imgvDelete, imgUpdate;
         CardView cardView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             cardView = itemView.findViewById(R.id.card_container);
-            tv_dPetname = itemView.findViewById(R.id.tv_dPetname);
+            tv_vPetname = itemView.findViewById(R.id.tv_vPetname);
             tv_vaccineintake = itemView.findViewById(R.id.tv_vaccine_take);
             tv_caredby = itemView.findViewById(R.id.tv_cared_by);
             tv_date = itemView.findViewById(R.id.tvdate);
-            imgDelete = itemView.findViewById(R.id.imgdelete);
-            imgUpdate = itemView.findViewById(R.id.imgedit);
+            imgvDelete = itemView.findViewById(R.id.imgvdelete);
 
             itemView.setOnClickListener(this);
         }
@@ -99,6 +136,7 @@ public class PetVacinationAdapterFirebase extends RecyclerView.Adapter<PetVacina
             intent.putExtra("petname", vaccineList.get(getAdapterPosition()).getPetName());
             intent.putExtra("time", vaccineList.get(getAdapterPosition()).getTime());
             intent.putExtra("date", vaccineList.get(getAdapterPosition()).getDate());
+            intent.putExtra("cared", vaccineList.get(getAdapterPosition()).getCared());
             intent.putExtra("vaccineIntake", vaccineList.get(getAdapterPosition()).getVaccineIntake());
             intent.putExtra("note", vaccineList.get(getAdapterPosition()).getNote());
             intent.putExtra("vaccineid", vaccineList.get(getAdapterPosition()).getVaccineId());

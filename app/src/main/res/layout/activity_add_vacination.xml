@@ -34,7 +34,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/et_petName"
+        android:id="@+id/etvpetName"
         android:layout_width="320dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
@@ -50,7 +50,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_pagetitle" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/et_date"
+        android:id="@+id/etvdate"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
@@ -65,12 +65,12 @@
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.58"
-        app:layout_constraintStart_toEndOf="@+id/et_time"
-        app:layout_constraintTop_toBottomOf="@+id/et_petName"
+        app:layout_constraintStart_toEndOf="@+id/etvtime"
+        app:layout_constraintTop_toBottomOf="@+id/etvpetName"
         tools:ignore="DuplicateIds" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/et_time"
+        android:id="@+id/etvtime"
         android:layout_width="155dp"
         android:layout_height="50dp"
         android:layout_marginStart="40dp"
@@ -83,7 +83,7 @@
         android:textAlignment="center"
         android:textColor="#000000"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_petName"
+        app:layout_constraintTop_toBottomOf="@+id/etvpetName"
         tools:ignore="DuplicateIds" />
 
     <TextView
@@ -96,8 +96,8 @@
         android:text="Select Vaccine:"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/et_time"
-        app:layout_constraintTop_toBottomOf="@+id/et_time" />
+        app:layout_constraintStart_toStartOf="@+id/etvtime"
+        app:layout_constraintTop_toBottomOf="@+id/etvtime" />
 
     <Spinner
         android:id="@+id/spn_vaccinetype"

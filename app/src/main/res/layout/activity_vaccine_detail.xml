@@ -34,12 +34,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/et_petName"
+        android:id="@+id/et_vpetName"
         android:layout_width="320dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/round_textfields"
         android:drawableLeft="@drawable/dog_paw2_24px"
+        android:editable="false"
         android:ems="10"
         android:fontFamily="@font/assistant"
         android:hint="Your Pet Name"
@@ -50,7 +51,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_pagetitle" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/et_date"
+        android:id="@+id/et_vdate"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
@@ -58,6 +59,7 @@
         android:layout_marginEnd="32dp"
         android:background="@drawable/round_textfields"
         android:drawableLeft="@drawable/timeline_week_24px"
+        android:editable="false"
         android:fontFamily="@font/assistant"
         android:hint="Date"
         android:outlineProvider="none"
@@ -65,25 +67,26 @@
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.58"
-        app:layout_constraintStart_toEndOf="@+id/et_time"
-        app:layout_constraintTop_toBottomOf="@+id/et_petName"
+        app:layout_constraintStart_toEndOf="@+id/et_vtime"
+        app:layout_constraintTop_toBottomOf="@+id/et_vpetName"
         tools:ignore="DuplicateIds" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/et_time"
+        android:id="@+id/et_vtime"
         android:layout_width="155dp"
         android:layout_height="50dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="24dp"
         android:background="@drawable/round_textfields"
         android:drawableLeft="@drawable/time_32px"
+        android:editable="false"
         android:fontFamily="@font/assistant"
         android:hint="Time"
         android:outlineProvider="none"
         android:textAlignment="center"
         android:textColor="#000000"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_petName"
+        app:layout_constraintTop_toBottomOf="@+id/et_vpetName"
         tools:ignore="DuplicateIds" />
 
     <TextView
@@ -96,22 +99,25 @@
         android:text="Vaccine selected:"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/et_time"
-        app:layout_constraintTop_toBottomOf="@+id/et_time" />
+        app:layout_constraintStart_toStartOf="@+id/et_vtime"
+        app:layout_constraintTop_toBottomOf="@+id/et_vtime" />
 
-    <Spinner
-        android:id="@+id/spn_vaccinetype"
+    <EditText
+        android:id="@+id/et_vaccine"
         android:layout_width="320dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:dropDownWidth="wrap_content"
-        android:entries="@array/vaccinetype"
-        android:spinnerMode="dialog"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/round_textfields"
+        android:drawableLeft="@drawable/syringe_24px"
+        android:editable="false"
+        android:ems="10"
+        android:fontFamily="@font/assistant"
+        android:hint="vaccine selected"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.538"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_selectvaccine"
-        tools:ignore="TouchTargetSizeCheck" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_selectvaccine" />
 
     <TextView
         android:id="@+id/tv_cared"
@@ -124,33 +130,25 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spn_vaccinetype" />
+        app:layout_constraintTop_toBottomOf="@+id/et_vaccine" />
 
-    <RadioGroup
-        android:id="@+id/radioGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="@+id/tv_cared"
-        app:layout_constraintTop_toBottomOf="@+id/tv_cared">
-
-        <RadioButton
-            android:id="@+id/rd_home"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:onClick="checkButton"
-            android:text="At Home" />
-
-        <RadioButton
-            android:id="@+id/rd_pro"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="checkButton"
-            android:text="By Professionals" />
-
-    </RadioGroup>
+    <EditText
+        android:id="@+id/et_cared"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/round_textfields"
+        android:drawableLeft="@drawable/home_24px"
+        android:editable="false"
+        android:ems="10"
+        android:fontFamily="@font/assistant"
+        android:hint="cared by"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.538"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_cared" />
+         />
 
     <TextView
         android:id="@+id/tv_notes"
@@ -161,15 +159,16 @@
         android:text="Notes:"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/radioGroup"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+        app:layout_constraintStart_toStartOf="@+id/et_cared"
+        app:layout_constraintTop_toBottomOf="@+id/et_cared" />
 
     <EditText
-        android:id="@+id/et_notes"
+        android:id="@+id/et_vnotes"
         android:layout_width="320dp"
         android:layout_height="100dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/round_textfields"
+        android:editable="false"
         android:ems="10"
         android:fontFamily="@font/assistant"
         android:hint="Note"
@@ -194,7 +193,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_notes" />
+        app:layout_constraintTop_toBottomOf="@+id/et_vnotes" />
 
     <ProgressBar
         android:id="@+id/progressBar"
