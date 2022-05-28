@@ -163,22 +163,43 @@
             android:layout_marginLeft="45dp"
             android:layout_marginTop="16dp" />
 
-        <Button
-            android:id="@+id/btn_set"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tp_settime"
-            android:layout_marginLeft="150dp"
-            android:layout_marginTop="45dp"
-            android:background="@drawable/round_buttons"
-            android:fontFamily="@font/text_me_one"
-            android:text="Set"
-            android:textAllCaps="true"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.507"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="20dp">
+
+            <Button
+                android:id="@+id/btn_set"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/round_buttons"
+                android:fontFamily="@font/text_me_one"
+                android:text="Set"
+                android:textAllCaps="true"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.507"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <Button
+                android:id="@+id/btn_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:background="@drawable/round_buttons"
+                android:fontFamily="@font/text_me_one"
+                android:text="Cancel"
+                android:textAllCaps="true"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.507"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </LinearLayout>
 
 
     </RelativeLayout>

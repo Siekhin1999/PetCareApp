@@ -115,6 +115,7 @@ public class DiaryFragment extends Fragment {
         EditText editText = view.findViewById(R.id.et_task);
         TimePicker timePicker = view.findViewById(R.id.tp_settime);
         Button btn_set = (Button) view.findViewById(R.id.btn_set);
+        Button btn_cancel = (Button) view.findViewById(R.id.btn_cancel);
 
         fAuth = FirebaseAuth.getInstance();
         fUser = fAuth.getCurrentUser();
@@ -184,6 +185,25 @@ public class DiaryFragment extends Fragment {
             }
         });
 
+/*        petRemindView.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), AlarmReceiver.class);
+                intent.putExtra("notificationId", notificationId);
+                intent.putExtra("message", editText.getText().toString());
+
+                PendingIntent alarmIntent = PendingIntent.getBroadcast(getActivity(),0,
+                        intent, PendingIntent.FLAG_CANCEL_CURRENT);
+
+                AlarmManager alarm = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
+
+                switch (view.getContext()){
+
+                }
+            }
+        });
+*/
         btn_set.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -193,7 +213,7 @@ public class DiaryFragment extends Fragment {
 
                 Intent intent = new Intent(getActivity(), AlarmReceiver.class);
                 intent.putExtra("notificationId", notificationId);
-                intent.putExtra("todo", editText.getText().toString());
+                intent.putExtra("message", editText.getText().toString());
 
                 PendingIntent alarmIntent = PendingIntent.getBroadcast(getActivity(),0,
                         intent, PendingIntent.FLAG_CANCEL_CURRENT);
@@ -211,6 +231,20 @@ public class DiaryFragment extends Fragment {
                 alarm.set(AlarmManager.RTC_WAKEUP, alarmStartTime, alarmIntent);
                 editText.getText().clear();
                 Toast.makeText(getActivity(), "Done!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), AlarmReceiver.class);
+                intent.putExtra("notificationId", notificationId);
+                intent.putExtra("message", editText.getText().toString());
+                PendingIntent alarmIntent = PendingIntent.getBroadcast(getActivity(),0,
+                        intent, PendingIntent.FLAG_CANCEL_CURRENT);
+                AlarmManager alarm = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
+                alarm.cancel(alarmIntent);
+                Toast.makeText(getActivity(), "Canceled", Toast.LENGTH_SHORT).show();
             }
         });
 
